@@ -3,17 +3,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TermView {
-    private final String columnFormat;
-    private final String horizonalLine;
+    private boolean isInTermView;
     private final TermDAO termDAO;
     private List<Term> termList;
-    private Boolean isInTermView;
     private final Scanner scanner;
 
     public TermView() {
         isInTermView = true;
-        this.columnFormat = "| %1s | %4s | %10s | %10s |";
-        this.horizonalLine = "+---+------+------------+------------+";
         termDAO = new TermDAO();
         termList = new ArrayList<>();
         scanner = new Scanner(System.in);
@@ -59,33 +55,21 @@ public class TermView {
         }
     }
 
-    // private void printHeader() {
-    // System.out.println("\n----------+");
-    // System.out.println("Term View |");
-    // System.out.println("----------+");
-    // }
-
     private void showTermsMenu(String menuHeader) {
-        // printHeader();
-        // System.out.println(menuHeader);
-        // String underline = "+";
-        // for (int i = 0; i < menuHeader.length() - 1; i++) {
-        // underline = "-" + underline;
-        // }
-        // System.out.println(underline);
 
         Utils.printMenuHeader("Term View", menuHeader);
 
         printTermList();
-        String option1 = "\n* #. Enter term # (1 - %s)";
-        System.out.println(String.format(option1, termList.size()));
-        System.out.println("* C. Create");
-        System.out.println("* U. Update");
-        System.out.println("* D. Delete");
-        System.out.println("* B. Back");
-        System.out.println("* Q. Quit");
+        String option1 = String.format("Enter term # (1 - %s)", termList.size());
 
-        System.out.print("\n< Selection: ");
+        Utils.printMenuItem("#", option1);
+        Utils.printMenuItem("C", "Create");
+        Utils.printMenuItem("U", "Update");
+        Utils.printMenuItem("D", "Delete");
+        Utils.printMenuItem("B", "Back");
+        Utils.printMenuItem("Q", "Quit");
+        Utils.printMenuSelection();
+
         String input = scanner.nextLine();
 
         if (input.matches("[^0-9]+")) {
@@ -125,7 +109,7 @@ public class TermView {
     private void printTermList() {
 
         printLine();
-        printRow("#", "year", "Term", "isActive");
+        printRow("#", "Year", "Term", "isActive");
         printLine();
 
         int lineNum = 1;
@@ -137,18 +121,12 @@ public class TermView {
     }
 
     private void openCourseView(Term term) {
-        System.out.println("View courses in " + term);
-        /*
-         * //Mimic the loop structure from this class
-         * CourseView courseView = new CourseView(term);
-         * courseView.open();
-         */
+        // Mimic the loop structure from this class
+        CourseView courseView = new CourseView(term);
+        courseView.open();
     }
 
     private void createTerm() {
-        // printHeader();
-        // System.out.println("Create new term |");
-        // System.out.println("----------------+");
 
         Utils.printMenuHeader("Term View", "Create New Term");
 
@@ -174,9 +152,6 @@ public class TermView {
     }
 
     private void updateTerm() {
-        // printHeader();
-        // System.out.println("-> Update Term |");
-        // System.out.println("---------------+");
 
         Utils.printMenuHeader("Term View", "Update Term");
 
@@ -231,9 +206,7 @@ public class TermView {
     }
 
     private void deleteTerm() {
-        // printHeader();
-        // System.out.println("-> Delete Term |");
-        // System.out.println("---------------+");
+
         Utils.printMenuHeader("Term View", "Delete Term");
 
         System.out.print("< Enter term # to delete: ");
@@ -255,6 +228,8 @@ public class TermView {
     }
 
     private void printRow(String col1, String col2, String col3, String col4) {
+        String columnFormat = "| %1s | %4s | %10s | %10s |";
+
         String row = String.format(columnFormat, col1, col2, col3, col4);
         System.out.println(row);
     }
@@ -264,6 +239,8 @@ public class TermView {
     }
 
     private void printLine() {
+        String horizonalLine = "+---+------+------------+------------+";
+
         System.out.println(horizonalLine);
     }
 }

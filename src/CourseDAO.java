@@ -55,9 +55,12 @@ public class CourseDAO {
         return course;
     }
 
-    public List<Course> getCourseList() {
+    public List<Course> getCourseList(int termId) {
         List<Course> courseList = new ArrayList<>();
         String query = "SELECT * FROM course";
+        if (termId > 0) {
+            query += " WHERE termId = " + termId;
+        }
 
         connection.open();
         try {

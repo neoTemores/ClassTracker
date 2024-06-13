@@ -2,10 +2,6 @@ import java.sql.ResultSet;
 
 public class Utils {
 
-    public static boolean toBoolean(int i) {
-        return i == 1;
-    }
-
     public static void printMenuHeader(String header, String subheader) {
         String formattedHeader = String.format("%s |", header);
         String formattedSubheader = String.format("-> %s |", subheader);
