@@ -61,7 +61,7 @@ public class TermView {
 
         printTermList();
         String option1 = String.format("Enter term # (1 - %s)", termList.size());
-
+        System.out.println();
         Utils.printMenuItem("#", option1);
         Utils.printMenuItem("C", "Create");
         Utils.printMenuItem("U", "Update");

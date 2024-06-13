@@ -35,6 +35,20 @@ public class CourseView {
         Utils.printMenuHeader("Course View", generateSubheaderText("Main Menu"));
 
         printCourseList();
+
+        String option1 = String.format("Enter course # (1 - %s)", courseList.size());
+        System.out.println();
+        Utils.printMenuItem("#", option1);
+        Utils.printMenuItem("C", "Create");
+        Utils.printMenuItem("U", "Update");
+        Utils.printMenuItem("D", "Delete");
+        Utils.printMenuItem("B", "Back");
+        Utils.printMenuItem("Q", "Quit");
+        Utils.printMenuSelection();
+
+        String input = scanner.nextLine();
+
+        // todo: switch over input
         isInCourseView = false;
     }
 
