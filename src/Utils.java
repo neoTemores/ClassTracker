@@ -2,6 +2,10 @@ import java.sql.ResultSet;
 
 public class Utils {
 
+    public static void clear() {
+        System.out.println("\033[H\033[2J");
+    }
+
     public static void printMenuHeader(String header, String subheader) {
         String formattedHeader = String.format("%s |", header);
         String formattedSubheader = String.format("-> %s |", subheader);
@@ -16,7 +20,6 @@ public class Utils {
             middleLine = "-" + middleLine;
         }
 
-        System.out.println();
         System.out.println(topLine);
         System.out.println(formattedHeader);
         System.out.println(middleLine);

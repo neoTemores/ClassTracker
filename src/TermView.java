@@ -16,7 +16,6 @@ public class TermView {
     }
 
     public boolean open() {
-
         while (isInTermView) {
             mainMenu();
         }
@@ -25,6 +24,8 @@ public class TermView {
     }
 
     private void mainMenu() {
+        Utils.clear();
+
         Utils.printMenuHeader("Term View", "Main Menu");
 
         System.out.println();
@@ -56,54 +57,66 @@ public class TermView {
     }
 
     private void showTermsMenu(String menuHeader) {
+        boolean isInSubMenu = true;
 
-        Utils.printMenuHeader("Term View", menuHeader);
+        while (isInSubMenu) {
+            Utils.clear();
+            Utils.printMenuHeader("Term View", menuHeader);
 
-        printTermList();
-        String option1 = String.format("Enter term # (1 - %s)", termList.size());
-        System.out.println();
-        Utils.printMenuItem("#", option1);
-        Utils.printMenuItem("C", "Create");
-        Utils.printMenuItem("U", "Update");
-        Utils.printMenuItem("D", "Delete");
-        Utils.printMenuItem("B", "Back");
-        Utils.printMenuItem("Q", "Quit");
-        Utils.printMenuSelection();
-
-        String input = scanner.nextLine();
-
-        if (input.matches("[^0-9]+")) {
-            switch (input) {
-                case "c":
-                case "C":
-                    createTerm();
-                    break;
-                case "u":
-                case "U":
-                    updateTerm();
-                    break;
-                case "d":
-                case "D":
-                    deleteTerm();
-                    break;
-                case "b":
-                case "B":
-                    break;
-                default:
-                    scanner.close();
-                    System.exit(0);
-                    break;
+            printTermList();
+            String option1 = String.format("Enter term # (1 - %s)", termList.size());
+            if (termList.size() == 0) {
+                option1 = "No terms found";
+            } else if (termList.size() == 1) {
+                option1 = "Enter term #";
             }
-        } else {
-            // input.matches("[0-9]+"
-            int termIndex = Integer.parseInt(input) - 1;
+            System.out.println();
+            Utils.printMenuItem("#", option1);
+            Utils.printMenuItem("C", "Create");
+            Utils.printMenuItem("U", "Update");
+            Utils.printMenuItem("D", "Delete");
+            Utils.printMenuItem("B", "Back");
+            Utils.printMenuItem("Q", "Quit");
+            Utils.printMenuSelection();
 
-            if (termIndex >= 0 && termIndex < termList.size()) {
-                openCourseView(termList.get(termIndex));
+            String input = scanner.nextLine();
+
+            // input is not^ a number
+            if (input.matches("[^0-9]+")) {
+                switch (input) {
+                    case "c":
+                    case "C":
+                        createTerm();
+                        break;
+                    case "u":
+                    case "U":
+                        updateTerm();
+                        break;
+                    case "d":
+                    case "D":
+                        deleteTerm();
+                        break;
+                    case "b":
+                    case "B":
+                        isInSubMenu = false;
+                        break;
+                    default:
+                        scanner.close();
+                        System.exit(0);
+                        break;
+                }
             } else {
-                System.out.println("> Selected index is out of bounds");
+                // input is a num
+                int termIndex = Integer.parseInt(input) - 1;
+
+                if (termIndex >= 0 && termIndex < termList.size()) {
+                    openCourseView(termList.get(termIndex));
+                } else {
+                    System.out.println("> Selected index is out of bounds");
+                }
             }
         }
+
     }
 
     private void printTermList() {
@@ -127,7 +140,7 @@ public class TermView {
     }
 
     private void createTerm() {
-
+        Utils.clear();
         Utils.printMenuHeader("Term View", "Create New Term");
 
         try {
@@ -140,7 +153,7 @@ public class TermView {
 
             Term term = new Term(0, name, year, isActive);
             System.out.println("> New " + term);
-            System.out.print("< Create new term? (y/n): ");
+            System.out.print("\n< Create new term? (y/n): ");
 
             String confrim = scanner.nextLine();
             if (Utils.confrim(confrim)) {
@@ -153,27 +166,28 @@ public class TermView {
 
     private void updateTerm() {
 
-        Utils.printMenuHeader("Term View", "Update Term");
-
-        System.out.print("> Enter Term # to update: ");
+        System.out.print("> Enter term # to update: ");
         String input = scanner.nextLine();
 
         if (input.matches("[0-9]+")) {
             int termIndex = Integer.parseInt(input) - 1;
             if (termIndex >= 0 && termIndex < termList.size()) {
+                Utils.clear();
+                Utils.printMenuHeader("Term View", "Update Term");
+
                 Term term = termList.get(termIndex);
                 System.out.println("> Updating " + term);
 
                 System.out.print("> Name: ");
                 String name = scanner.nextLine();
-                if (name.trim().length() == 0) {
+                if (name.isBlank()) {
                     name = term.getName();
                 }
 
                 System.out.print("> Year: ");
                 String yearStr = scanner.nextLine();
                 int year = 0;
-                if (yearStr.trim().length() == 0) {
+                if (yearStr.isBlank()) {
                     year = term.getYear();
                 } else {
                     year = Integer.parseInt(yearStr);
@@ -207,14 +221,16 @@ public class TermView {
 
     private void deleteTerm() {
 
-        Utils.printMenuHeader("Term View", "Delete Term");
-
-        System.out.print("< Enter term # to delete: ");
+        System.out.print("< Enter Term # to delete: ");
         String input = scanner.nextLine();
 
         if (input.matches("[0-9]+")) {
             int termIndex = Integer.parseInt(input) - 1;
             if (termIndex >= 0 && termIndex < termList.size()) {
+
+                Utils.clear();
+                Utils.printMenuHeader("Term View", "Delete Term");
+
                 Term term = termList.get(termIndex);
                 System.out.println("\n> Seleted " + term);
                 System.out.print("> Delete? (y/n): ");
