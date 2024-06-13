@@ -39,12 +39,10 @@ public class TermView {
 
         switch (selection) {
             case "1":
-                termList = termDAO.getTermList(true);
-                showTermsMenu("Active Terms");
+                showTermsMenu("Active Terms", true);
                 break;
             case "2":
-                termList = termDAO.getTermList(false);
-                showTermsMenu("All Terms");
+                showTermsMenu("All Terms", false);
                 break;
             case "c":
             case "C":
@@ -56,10 +54,11 @@ public class TermView {
         }
     }
 
-    private void showTermsMenu(String menuHeader) {
+    private void showTermsMenu(String menuHeader, boolean isFilterByActive) {
         boolean isInSubMenu = true;
 
         while (isInSubMenu) {
+            termList = termDAO.getTermList(isFilterByActive);
             Utils.clear();
             Utils.printMenuHeader("Term View", menuHeader);
 

@@ -32,7 +32,7 @@ public class CourseView {
         courseList = courseDAO.getCourseList(term.getId());
 
         Utils.clear();
-        Utils.printMenuHeader("Course View", generateSubheaderText("Main Menu"));
+        Utils.printMenuHeader("Course View", generateSubheaderText("For Term"));
 
         printCourseList();
 
