@@ -30,7 +30,7 @@ public class CourseView {
         courseList = courseDAO.getCourseList(term.getId());
 
         Utils.clear();
-        Utils.printMenuHeader("Course View", generateSubheaderText("For Term"));
+        Utils.printMenuHeader("Course View", Utils.generateSubHeaderTitle("For Term", termTitle));
 
         printCourseList();
 
@@ -52,7 +52,7 @@ public class CourseView {
         String input = scanner.nextLine();
 
         // if input != num
-        if (input.matches("[^0-9]+")) {
+        if (input.matches("[^0-9]+") || input.isBlank()) {
             switch (input) {
                 case "c":
                 case "C":
@@ -85,17 +85,14 @@ public class CourseView {
 
     }
 
-private void openAssignmentView(Course course) {
-        /*
-         * AssignmentView assignmentView = new AssignmentView(course);
-         * assignmentView.open();
-         */
-
+    private void openAssignmentView(Course course) {
+        AssignmentView assignmentView = new AssignmentView(course);
+        assignmentView.open();
     }
 
     private void createCourse() {
         Utils.clear();
-        Utils.printMenuHeader("Course View", generateSubheaderText("Create New Course"));
+        Utils.printMenuHeader("Course View", Utils.generateSubHeaderTitle("For Term", termTitle));
 
         try {
             System.out.print("< Code: ");
@@ -125,7 +122,7 @@ private void openAssignmentView(Course course) {
             int courseIndex = Integer.parseInt(input) - 1;
             if (courseIndex >= 0 && courseIndex < courseList.size()) {
                 Utils.clear();
-                Utils.printMenuHeader("Course View", generateSubheaderText("Update Course"));
+                Utils.printMenuHeader("Course View", Utils.generateSubHeaderTitle("For Term", termTitle));
 
                 Course course = courseList.get(courseIndex);
                 System.out.println("> Updating " + course);
@@ -164,7 +161,7 @@ private void openAssignmentView(Course course) {
             if (courseIndex >= 0 && courseIndex < courseList.size()) {
 
                 Utils.clear();
-                Utils.printMenuHeader("Course View", generateSubheaderText("Delete Course"));
+                Utils.printMenuHeader("Course View", Utils.generateSubHeaderTitle("For Term", termTitle));
 
                 Course course = courseList.get(courseIndex);
                 System.out.println("\n> Seleted " + course);
@@ -176,11 +173,6 @@ private void openAssignmentView(Course course) {
                 }
             }
         }
-    }
-
-    private String generateSubheaderText(String subheader) {
-        String subheaderFormat = "%s (%s)";
-        return String.format(subheaderFormat, subheader, termTitle);
     }
 
     private void printCourseList() {
@@ -197,19 +189,19 @@ private void openAssignmentView(Course course) {
     }
 
     private void printLine() {
-        String horizonalLine = "+---+------------+-----------------------------------+";
+        String horizonalLine = "+---+------------+-------------------------------------+";
         System.out.println(horizonalLine);
     }
 
     private void printRow(String col1, String col2, String col3) {
-        String columnFormat = "| %1s | %10s | %33s |";
+        String columnFormat = "| %1s | %10s | %35s |";
         String row = String.format(columnFormat, col1, col2, col3);
         System.out.println(row);
     }
 
     private void printRow(int lineNum, String code, String name) {
-        if (name.length() > 30) {
-            name = name.substring(0, 30) + "...";
+        if (name.length() > 32) {
+            name = name.substring(0, 32) + "...";
         }
         printRow(String.valueOf(lineNum), code, name);
     }

@@ -35,7 +35,7 @@ public class TermView {
         Utils.printMenuItem("Q", "Quit");
         Utils.printMenuSelection();
 
-        String selection = scanner.nextLine();
+        String selection = scanner.nextLine().trim();
 
         switch (selection) {
             case "1":
@@ -47,6 +47,8 @@ public class TermView {
             case "c":
             case "C":
                 createTerm();
+                break;
+            case "":
                 break;
             default:
                 this.isInTermView = false;
@@ -78,10 +80,18 @@ public class TermView {
             Utils.printMenuItem("Q", "Quit");
             Utils.printMenuSelection();
 
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().trim();
 
-            // input is not^ a number
-            if (input.matches("[^0-9]+")) {
+            if (input.matches("[0-9]+")) {
+                // input is a num
+                int termIndex = Integer.parseInt(input) - 1;
+
+                if (termIndex >= 0 && termIndex < termList.size()) {
+                    openCourseView(termList.get(termIndex));
+                } else {
+                    Utils.showTempMsg("Error: Selected index is out of bounds!");
+                }
+            } else {
                 switch (input) {
                     case "c":
                     case "C":
@@ -99,21 +109,51 @@ public class TermView {
                     case "B":
                         isInSubMenu = false;
                         break;
+                    case "":
+                        break;
                     default:
                         scanner.close();
                         System.exit(0);
                         break;
                 }
-            } else {
-                // input is a num
-                int termIndex = Integer.parseInt(input) - 1;
-
-                if (termIndex >= 0 && termIndex < termList.size()) {
-                    openCourseView(termList.get(termIndex));
-                } else {
-                    System.out.println("> Selected index is out of bounds");
-                }
             }
+
+            // // input is not^ a number
+            // if (input.matches("[^0-9]+") || input.isBlank()) {
+            // switch (input) {
+            // case "c":
+            // case "C":
+            // createTerm();
+            // break;
+            // case "u":
+            // case "U":
+            // updateTerm();
+            // break;
+            // case "d":
+            // case "D":
+            // deleteTerm();
+            // break;
+            // case "b":
+            // case "B":
+            // isInSubMenu = false;
+            // break;
+            // case "":
+            // break;
+            // default:
+            // scanner.close();
+            // System.exit(0);
+            // break;
+            // }
+            // } else {
+            // // input is a num
+            // int termIndex = Integer.parseInt(input) - 1;
+
+            // if (termIndex >= 0 && termIndex < termList.size()) {
+            // openCourseView(termList.get(termIndex));
+            // } else {
+            // System.out.println("> Selected index is out of bounds");
+            // }
+            // }
         }
 
     }

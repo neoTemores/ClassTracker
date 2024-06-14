@@ -6,6 +6,15 @@ public class Utils {
         System.out.println("\033[H\033[2J");
     }
 
+    public static void showTempMsg(String msg) {
+        System.out.println("> " + msg);
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void printMenuHeader(String header, String subheader) {
         String formattedHeader = String.format("%s |", header);
         String formattedSubheader = String.format("-> %s |", subheader);
@@ -25,6 +34,11 @@ public class Utils {
         System.out.println(middleLine);
         System.out.println(formattedSubheader);
         System.out.println(bottomLine);
+    }
+
+    public static String generateSubHeaderTitle(String subHeader, String subTitle) {
+        String subheaderFormat = "%s (%s)";
+        return String.format(subheaderFormat, subHeader, subTitle);
     }
 
     private static String generateUnderline(String title) {
