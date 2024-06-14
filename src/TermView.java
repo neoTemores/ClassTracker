@@ -153,12 +153,12 @@ public class TermView {
             System.out.println("> New " + term);
             System.out.print("\n< Create new term? (y/n): ");
 
-            String confrim = scanner.nextLine();
-            if (Utils.confrim(confrim)) {
+            String confirm = scanner.nextLine();
+            if (Utils.confirm(confirm)) {
                 termDAO.createTerm(term);
             }
         } catch (Exception e) {
-            System.out.println(e.toString());
+            Utils.showTempMsg(e.toString());
         }
     }
 
@@ -209,7 +209,7 @@ public class TermView {
 
                 System.out.print("< Proceed with update? (y/n): ");
                 String confirm = scanner.nextLine();
-                if (Utils.confrim(confirm)) {
+                if (Utils.confirm(confirm)) {
                     termDAO.updateTerm(term);
                 }
             }
@@ -219,7 +219,7 @@ public class TermView {
 
     private void deleteTerm() {
 
-        System.out.print("< Enter Term # to delete: ");
+        System.out.print("< Enter term # to delete: ");
         String input = scanner.nextLine();
 
         if (input.matches("[0-9]+")) {
@@ -234,9 +234,11 @@ public class TermView {
                 System.out.print("> Delete? (y/n): ");
                 String confirm = scanner.nextLine();
 
-                if (Utils.confrim(confirm)) {
+                if (Utils.confirm(confirm)) {
                     termDAO.deleteTerm(term.getId());
                 }
+            } else {
+                Utils.showTempMsg("Error: Selected index is out of bounds!");
             }
         }
     }

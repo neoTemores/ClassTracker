@@ -7,7 +7,7 @@ public class Utils {
     }
 
     public static void showTempMsg(String msg) {
-        System.out.println("> " + msg);
+        System.out.println("> ** " + msg + " **");
         try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
@@ -66,7 +66,7 @@ public class Utils {
         System.out.print("\n< Selection: ");
     }
 
-    public static boolean confrim(String input) {
+    public static boolean confirm(String input) {
         return input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes");
     }
 

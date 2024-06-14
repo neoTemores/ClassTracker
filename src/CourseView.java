@@ -102,13 +102,13 @@ public class CourseView {
             System.out.println("> New " + course);
             System.out.print("\n< Create new course? (y/n): ");
 
-            String confrim = scanner.nextLine();
-            if (Utils.confrim(confrim)) {
+            String confirm = scanner.nextLine();
+            if (Utils.confirm(confirm)) {
                 courseDAO.createCourse(course);
             }
 
         } catch (Exception e) {
-            System.out.println(e.toString());
+            Utils.showTempMsg(e.toString());
         }
     }
 
@@ -142,7 +142,7 @@ public class CourseView {
 
                 System.out.print("< Proceed with update? (y/n): ");
                 String confrim = scanner.nextLine();
-                if (Utils.confrim(confrim)) {
+                if (Utils.confirm(confrim)) {
                     courseDAO.updateCourse(course);
                 }
             }
@@ -150,7 +150,7 @@ public class CourseView {
     }
 
     private void deleteCourse() {
-        System.out.print("< Enter Course # to delete: ");
+        System.out.print("< Enter course # to delete: ");
         String input = scanner.nextLine();
 
         if (input.matches("[0-9]+")) {
@@ -165,9 +165,11 @@ public class CourseView {
                 System.out.print("> Delete? (y/n): ");
                 String confirm = scanner.nextLine();
 
-                if (Utils.confrim(confirm)) {
+                if (Utils.confirm(confirm)) {
                     courseDAO.deleteCourse(course.getId());
                 }
+            } else {
+                Utils.showTempMsg("Error: Selected index is out of bounds!");
             }
         }
     }

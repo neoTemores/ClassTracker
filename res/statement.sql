@@ -18,7 +18,7 @@
 		courseId int,
 		week int,
 		name varchar(50),
-		status enum('notStarted', 'inProgress', 'complete'),
+		status enum('NOT_STARTED', 'IN_PROGRESS', 'COMPLETE'),
 		notes text,
 		foreign key(courseId) references course(id) on delete cascade
 	);

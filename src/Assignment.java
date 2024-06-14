@@ -1,9 +1,19 @@
 public class Assignment {
 
     public enum Status {
-        notStarted,
-        inProgress,
-        complete;
+        NOT_STARTED("Not Started"),
+        IN_PROGRESS("In Progress"),
+        COMPLETE("Complete");
+
+        private String status;
+
+        private Status(String status) {
+            this.status = status;
+        }
+
+        public String getStatus() {
+            return status;
+        }
     }
 
     private int id;
@@ -14,7 +24,7 @@ public class Assignment {
     private String notes;
 
     public Assignment() {
-        this(0, 0, 0, "name - n/a", Status.notStarted, null);
+        this(0, 0, 0, "name - n/a", Status.NOT_STARTED, null);
     }
 
     public Assignment(int id, int courseId, int week, String name, Assignment.Status status, String notes) {

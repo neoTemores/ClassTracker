@@ -32,9 +32,115 @@ public class AssignmentView {
         Utils.printMenuHeader("Assignment View", Utils.generateSubHeaderTitle("For Course", courseTitle));
 
         printAssignmentList();
-        // todo delete:
-        String pause = scanner.nextLine();
-        isInAssignmentView = false;
+
+        System.out.println();
+        Utils.printMenuItem("W", "Filter by week #");
+        Utils.printCRUDmenu();
+        Utils.printMenuSelection();
+
+        String input = scanner.nextLine().trim();
+        switch (input) {
+            case "w":
+            case "W":
+                openFilterByWeekView();
+                break;
+            case "c":
+            case "C":
+                createAssignment();
+                break;
+            case "u":
+            case "U":
+                updateAssignment();
+                break;
+            case "d":
+            case "D":
+                deleteAssignment();
+                break;
+            case "b":
+            case "B":
+                isInAssignmentView = false;
+                break;
+            case "":
+                break;
+            default:
+                scanner.close();
+                System.exit(0);
+                break;
+        }
+    }
+
+    private void openFilterByWeekView() {
+
+    }
+
+    private void createAssignment() {
+        Utils.clear();
+        Utils.printMenuHeader("Assignment View", Utils.generateSubHeaderTitle("For Course", courseTitle));
+
+        try {
+            System.out.print("< Week #: ");
+            int week = Integer.parseInt(scanner.nextLine());
+
+            System.out.print("< Name: ");
+            String name = scanner.nextLine();
+
+            System.out.println();
+            Utils.printMenuItem("1", Assignment.Status.NOT_STARTED.getStatus());
+            Utils.printMenuItem("2", Assignment.Status.IN_PROGRESS.getStatus());
+            Utils.printMenuItem("3", Assignment.Status.COMPLETE.getStatus());
+
+            System.out.print("< Status: ");
+            Assignment.Status status = parseStatus(scanner.nextLine());
+
+            System.out.print("< Notes: ");
+            String notes = scanner.nextLine();
+
+            Assignment assignment = new Assignment(0, course.getId(), week, name, status, notes);
+            System.out.println("> New " + assignment);
+            System.out.print("\n< Create new assignment? (y/n): ");
+
+            String confrim = scanner.nextLine();
+            if (Utils.confirm(confrim)) {
+                assignmentDAO.createAssignment(assignment);
+            }
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
+        }
+    }
+
+    private Assignment.Status parseStatus(String input) {
+        Assignment.Status status;
+        switch (input) {
+            case "2":
+                status = Assignment.Status.IN_PROGRESS;
+                break;
+            case "3":
+                status = Assignment.Status.COMPLETE;
+                break;
+            default:
+                status = Assignment.Status.NOT_STARTED;
+                break;
+        }
+
+        return status;
+    }
+
+    private void updateAssignment() {
+
+    }
+
+    private void deleteAssignment() {
+        System.out.print("< Enter assignment # to delete: ");
+        String input = scanner.nextLine();
+
+        if (input.matches("[0-9]+")) {
+            int assignmentIndex = Integer.parseInt(input) - 1;
+            if (assignmentIndex >= 0 && assignmentIndex < assignmentList.size()) {
+                // todo HANDLE DELETE
+            } else {
+                Utils.showTempMsg("Error: Selected index is out of bounds!");
+            }
+        }
     }
 
     private void printAssignmentList() {
@@ -62,6 +168,6 @@ public class AssignmentView {
     }
 
     private void printRow(int lineNum, int week, String name, Assignment.Status status, String notes) {
-        printRow(String.valueOf(lineNum), String.valueOf(week), name, status.toString(), notes);
+        printRow(String.valueOf(lineNum), String.valueOf(week), name, status.getStatus(), notes);
     }
 }
