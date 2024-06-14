@@ -30,7 +30,7 @@ public class CourseView {
         courseList = courseDAO.getCourseList(term.getId());
 
         Utils.clear();
-        Utils.printMenuHeader("Course View", Utils.generateSubHeaderTitle("For Term", termTitle));
+        Utils.printMenuHeader("Course View", Utils.getSubHeaderTitle("For Term", termTitle));
 
         printCourseList();
 
@@ -89,7 +89,7 @@ public class CourseView {
 
     private void createCourse() {
         Utils.clear();
-        Utils.printMenuHeader("Course View", Utils.generateSubHeaderTitle("For Term", termTitle));
+        Utils.printMenuHeader("Course View", Utils.getSubHeaderTitle("For Term", termTitle));
 
         try {
             System.out.print("< Code: ");
@@ -119,18 +119,18 @@ public class CourseView {
             int courseIndex = Integer.parseInt(input) - 1;
             if (courseIndex >= 0 && courseIndex < courseList.size()) {
                 Utils.clear();
-                Utils.printMenuHeader("Course View", Utils.generateSubHeaderTitle("For Term", termTitle));
+                Utils.printMenuHeader("Course View", Utils.getSubHeaderTitle("Update course in ", termTitle));
 
                 Course course = courseList.get(courseIndex);
                 System.out.println("> Updating " + course);
 
-                System.out.print("> Code: ");
+                System.out.print("< Code: ");
                 String code = scanner.nextLine();
                 if (code.isBlank()) {
                     code = course.getCode();
                 }
 
-                System.out.print("> Name: ");
+                System.out.print("< Name: ");
                 String name = scanner.nextLine();
                 if (name.isBlank()) {
                     name = course.getName();
@@ -145,6 +145,8 @@ public class CourseView {
                 if (Utils.confirm(confrim)) {
                     courseDAO.updateCourse(course);
                 }
+            } else {
+                Utils.showTempMsg("Error: Selected index is out of bounds!");
             }
         }
     }
@@ -158,11 +160,11 @@ public class CourseView {
             if (courseIndex >= 0 && courseIndex < courseList.size()) {
 
                 Utils.clear();
-                Utils.printMenuHeader("Course View", Utils.generateSubHeaderTitle("For Term", termTitle));
+                Utils.printMenuHeader("Course View", Utils.getSubHeaderTitle("For Term", termTitle));
 
                 Course course = courseList.get(courseIndex);
                 System.out.println("\n> Seleted " + course);
-                System.out.print("> Delete? (y/n): ");
+                System.out.print("< Delete? (y/n): ");
                 String confirm = scanner.nextLine();
 
                 if (Utils.confirm(confirm)) {

@@ -36,7 +36,7 @@ public class Utils {
         System.out.println(bottomLine);
     }
 
-    public static String generateSubHeaderTitle(String subHeader, String subTitle) {
+    public static String getSubHeaderTitle(String subHeader, String subTitle) {
         String subheaderFormat = "%s (%s)";
         return String.format(subheaderFormat, subHeader, subTitle);
     }

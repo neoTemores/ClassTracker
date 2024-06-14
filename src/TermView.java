@@ -176,23 +176,23 @@ public class TermView {
                 Term term = termList.get(termIndex);
                 System.out.println("> Updating " + term);
 
-                System.out.print("> Name: ");
-                String name = scanner.nextLine();
+                System.out.print("< Name: ");
+                String name = scanner.nextLine().trim();
                 if (name.isBlank()) {
                     name = term.getName();
                 }
 
-                System.out.print("> Year: ");
-                String yearStr = scanner.nextLine();
+                System.out.print("< Year: ");
+                String yearStr = scanner.nextLine().trim();
                 int year = 0;
-                if (yearStr.isBlank()) {
+                if (yearStr.isBlank() || !yearStr.matches("[0-9]+")) {
                     year = term.getYear();
                 } else {
                     year = Integer.parseInt(yearStr);
                 }
 
-                System.out.print("> isActive (t/f): ");
-                String isActiveStr = scanner.nextLine();
+                System.out.print("< isActive (t/f): ");
+                String isActiveStr = scanner.nextLine().trim();
                 boolean isActive;
                 if (isActiveStr.equalsIgnoreCase("t") || isActiveStr.equalsIgnoreCase("true")) {
                     isActive = true;
@@ -212,6 +212,8 @@ public class TermView {
                 if (Utils.confirm(confirm)) {
                     termDAO.updateTerm(term);
                 }
+            } else {
+                Utils.showTempMsg("Error: Selected index is out of bounds!");
             }
 
         }
