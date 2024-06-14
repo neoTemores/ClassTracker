@@ -60,14 +60,14 @@ public class TrackerAppTests {
         CourseDAO courseDAO = new CourseDAO();
 
         System.out.println("\nGet all courses");
-        List<Course> courseList = courseDAO.getCourseList();
+        List<Course> courseList = courseDAO.getCourseList(0);
         for (Course c : courseList) {
             System.out.println(c);
         }
         System.out.println("\nCreating new course:");
         courseDAO.createCourse(new Course(0, 1, "testCode", "testName"));
 
-        courseList = courseDAO.getCourseList();
+        courseList = courseDAO.getCourseList(0);
         for (Course c : courseList) {
             System.out.println(c);
         }
@@ -84,7 +84,7 @@ public class TrackerAppTests {
         System.out.println("delete course:");
         courseDAO.deleteCourse(course1.getId());
 
-        courseList = courseDAO.getCourseList();
+        courseList = courseDAO.getCourseList(0);
         for (Course c : courseList) {
             System.out.println(c);
         }

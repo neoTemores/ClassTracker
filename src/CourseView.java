@@ -19,13 +19,11 @@ public class CourseView {
         termTitle = term.getName() + " " + term.getYear();
     }
 
-    public boolean open() {
+    public void open() {
 
         while (isInCourseView) {
             mainMenu();
         }
-
-        return false;
     }
 
     private void mainMenu() {
@@ -87,14 +85,12 @@ public class CourseView {
 
     }
 
-    private void openAssignmentView(Course course) {
+private void openAssignmentView(Course course) {
         /*
          * AssignmentView assignmentView = new AssignmentView(course);
          * assignmentView.open();
          */
 
-        System.out.println(course);
-        String pause = scanner.nextLine();
     }
 
     private void createCourse() {

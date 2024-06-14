@@ -57,13 +57,18 @@ public class AssignmentDAO {
         return assignment;
     }
 
-    public List<Assignment> getAssignmentList() {
+    public List<Assignment> getAssignmentList(int courseId) {
         List<Assignment> assignmentList = new ArrayList<>();
         String query = "SELECT * FROM assignment";
-
+        if (courseId > 0) {
+            query += " WHERE courseId = ?";
+        }
         connection.open();
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
+            if (courseId > 0) {
+                statement.setInt(1, courseId);
+            }
             ResultSet data = statement.executeQuery();
 
             while (data.next()) {

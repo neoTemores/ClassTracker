@@ -59,13 +59,15 @@ public class CourseDAO {
         List<Course> courseList = new ArrayList<>();
         String query = "SELECT * FROM course";
         if (termId > 0) {
-            query += " WHERE termId = " + termId;
+            query += " WHERE termId = ?";
         }
 
         connection.open();
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
-
+            if (termId > 0) {
+                statement.setInt(1, termId);
+            }
             ResultSet data = statement.executeQuery();
 
             while (data.next()) {
