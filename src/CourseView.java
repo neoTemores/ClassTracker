@@ -49,10 +49,16 @@ public class CourseView {
         Utils.printMenuItem("Q", "Quit");
         Utils.printMenuSelection();
 
-        String input = scanner.nextLine();
-
-        // if input != num
-        if (input.matches("[^0-9]+") || input.isBlank()) {
+        String input = scanner.nextLine().trim();
+        if (input.matches("[0-9]+")) {
+            // input is a num
+            int courseIndex = Integer.parseInt(input) - 1;
+            if (courseIndex >= 0 && courseIndex < courseList.size()) {
+                openAssignmentView(courseList.get(courseIndex));
+            } else {
+                Utils.showTempMsg("Error: Selected index is out of bounds!");
+            }
+        } else {
             switch (input) {
                 case "c":
                 case "C":
@@ -70,18 +76,45 @@ public class CourseView {
                 case "B":
                     isInCourseView = false;
                     break;
+                case "":
+                    break;
                 default:
                     scanner.close();
                     System.exit(0);
                     break;
             }
-        } else {
-            // input is a num
-            int courseIndex = Integer.parseInt(input) - 1;
-            if (courseIndex >= 0 && courseIndex < courseList.size()) {
-                openAssignmentView(courseList.get(courseIndex));
-            }
         }
+        // // if input != num
+        // if (input.matches("[^0-9]+") || input.isBlank()) {
+        // switch (input) {
+        // case "c":
+        // case "C":
+        // createCourse();
+        // break;
+        // case "u":
+        // case "U":
+        // updateCourse();
+        // break;
+        // case "d":
+        // case "D":
+        // deleteCourse();
+        // break;
+        // case "b":
+        // case "B":
+        // isInCourseView = false;
+        // break;
+        // default:
+        // scanner.close();
+        // System.exit(0);
+        // break;
+        // }
+        // } else {
+        // // input is a num
+        // int courseIndex = Integer.parseInt(input) - 1;
+        // if (courseIndex >= 0 && courseIndex < courseList.size()) {
+        // openAssignmentView(courseList.get(courseIndex));
+        // }
+        // }
 
     }
 
