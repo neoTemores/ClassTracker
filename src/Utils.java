@@ -49,6 +49,14 @@ public class Utils {
         return underline;
     }
 
+    public static void printCRUDmenu() {
+        printMenuItem("C", "Create");
+        printMenuItem("U", "Update");
+        printMenuItem("D", "Delete");
+        printMenuItem("B", "Back");
+        printMenuItem("Q", "Quit");
+    }
+
     public static void printMenuItem(String key, String value) {
         String itemFormat = "* %s. %s";
         System.out.println(String.format(itemFormat, key, value));

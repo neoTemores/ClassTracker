@@ -42,11 +42,7 @@ public class CourseView {
         }
         System.out.println();
         Utils.printMenuItem("#", option1);
-        Utils.printMenuItem("C", "Create");
-        Utils.printMenuItem("U", "Update");
-        Utils.printMenuItem("D", "Delete");
-        Utils.printMenuItem("B", "Back");
-        Utils.printMenuItem("Q", "Quit");
+        Utils.printCRUDmenu();
         Utils.printMenuSelection();
 
         String input = scanner.nextLine().trim();
@@ -84,38 +80,6 @@ public class CourseView {
                     break;
             }
         }
-        // // if input != num
-        // if (input.matches("[^0-9]+") || input.isBlank()) {
-        // switch (input) {
-        // case "c":
-        // case "C":
-        // createCourse();
-        // break;
-        // case "u":
-        // case "U":
-        // updateCourse();
-        // break;
-        // case "d":
-        // case "D":
-        // deleteCourse();
-        // break;
-        // case "b":
-        // case "B":
-        // isInCourseView = false;
-        // break;
-        // default:
-        // scanner.close();
-        // System.exit(0);
-        // break;
-        // }
-        // } else {
-        // // input is a num
-        // int courseIndex = Integer.parseInt(input) - 1;
-        // if (courseIndex >= 0 && courseIndex < courseList.size()) {
-        // openAssignmentView(courseList.get(courseIndex));
-        // }
-        // }
-
     }
 
     private void openAssignmentView(Course course) {

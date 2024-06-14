@@ -73,11 +73,7 @@ public class TermView {
             }
             System.out.println();
             Utils.printMenuItem("#", option1);
-            Utils.printMenuItem("C", "Create");
-            Utils.printMenuItem("U", "Update");
-            Utils.printMenuItem("D", "Delete");
-            Utils.printMenuItem("B", "Back");
-            Utils.printMenuItem("Q", "Quit");
+            Utils.printCRUDmenu();
             Utils.printMenuSelection();
 
             String input = scanner.nextLine().trim();
@@ -117,43 +113,6 @@ public class TermView {
                         break;
                 }
             }
-
-            // // input is not^ a number
-            // if (input.matches("[^0-9]+") || input.isBlank()) {
-            // switch (input) {
-            // case "c":
-            // case "C":
-            // createTerm();
-            // break;
-            // case "u":
-            // case "U":
-            // updateTerm();
-            // break;
-            // case "d":
-            // case "D":
-            // deleteTerm();
-            // break;
-            // case "b":
-            // case "B":
-            // isInSubMenu = false;
-            // break;
-            // case "":
-            // break;
-            // default:
-            // scanner.close();
-            // System.exit(0);
-            // break;
-            // }
-            // } else {
-            // // input is a num
-            // int termIndex = Integer.parseInt(input) - 1;
-
-            // if (termIndex >= 0 && termIndex < termList.size()) {
-            // openCourseView(termList.get(termIndex));
-            // } else {
-            // System.out.println("> Selected index is out of bounds");
-            // }
-            // }
         }
 
     }
