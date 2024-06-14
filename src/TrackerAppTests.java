@@ -22,16 +22,16 @@ public class TrackerAppTests {
     public static void testAssignment() {
         AssignmentDAO assignmentDAO = new AssignmentDAO();
         System.out.println("\nGet list of assignments");
-        List<Assignment> assignmentList = assignmentDAO.getAssignmentList();
+        List<Assignment> assignmentList = assignmentDAO.getAssignmentList(0, 0);
         for (Assignment a : assignmentList) {
             System.out.println(a);
         }
 
         System.out.println("\nCreate new assignment:");
         Assignment assignment = new Assignment(0, 1, 1, "Discussions",
-                Assignment.Status.notStarted, "0/3");
+                Assignment.Status.NOT_STARTED, "0/3");
         assignmentDAO.createAssignment(assignment);
-        assignmentList = assignmentDAO.getAssignmentList();
+        assignmentList = assignmentDAO.getAssignmentList(0, 0);
         for (Assignment a : assignmentList) {
             System.out.println(a);
         }
@@ -40,7 +40,7 @@ public class TrackerAppTests {
 
         Assignment oldAssignment = assignmentList.get(assignmentList.size() - 1);
         Assignment newAssignment = new Assignment(oldAssignment.getId(), oldAssignment.getCourseId(),
-                5, "New Name", Assignment.Status.inProgress, "updated notes");
+                5, "New Name", Assignment.Status.IN_PROGRESS, "updated notes");
 
         assignmentDAO.updateAssignment(newAssignment);
 
@@ -50,7 +50,7 @@ public class TrackerAppTests {
         System.out.println("\nDelete one assignment:");
         assignmentDAO.deleteAssignment(newAssignment.getId());
 
-        assignmentList = assignmentDAO.getAssignmentList();
+        assignmentList = assignmentDAO.getAssignmentList(0, 0);
         for (Assignment a : assignmentList) {
             System.out.println(a);
         }

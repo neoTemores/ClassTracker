@@ -1,6 +1,11 @@
 import java.sql.ResultSet;
 
 public class Utils {
+    public final static String RESET = "\u001B[0m";
+    public final static String RED = "\u001B[31m";
+    public final static String GREEN = "\u001B[32m";
+    public final static String YELLOW = "\u001B[33m";
+    public final static String BLUE = ""; // cycle through 3Xm values to find header color
 
     public static void clear() {
         System.out.println("\033[H\033[2J");
@@ -16,6 +21,8 @@ public class Utils {
     }
 
     public static void printMenuHeader(String header, String subheader) {
+        // TODO: add print here to view app name in color
+
         String formattedHeader = String.format("%s |", header);
         String formattedSubheader = String.format("-> %s |", subheader);
 

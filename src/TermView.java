@@ -25,7 +25,6 @@ public class TermView {
 
     private void mainMenu() {
         Utils.clear();
-
         Utils.printMenuHeader("Term View", "Main Menu");
 
         System.out.println();

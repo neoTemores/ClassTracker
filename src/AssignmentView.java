@@ -126,9 +126,9 @@ public class AssignmentView {
 
     private void printGetStatusInstructions() {
         System.out.println();
-        Utils.printMenuItem("1", Assignment.Status.NOT_STARTED.getStatus());
-        Utils.printMenuItem("2", Assignment.Status.IN_PROGRESS.getStatus());
-        Utils.printMenuItem("3", Assignment.Status.COMPLETE.getStatus());
+        Utils.printMenuItem("1", Utils.RED + Assignment.Status.NOT_STARTED.getStatus() + Utils.RESET);
+        Utils.printMenuItem("2", Utils.YELLOW + Assignment.Status.IN_PROGRESS.getStatus() + Utils.RESET);
+        Utils.printMenuItem("3", Utils.GREEN + Assignment.Status.COMPLETE.getStatus() + Utils.RESET);
 
         System.out.print("< Status: ");
     }
@@ -260,6 +260,23 @@ public class AssignmentView {
 
     private void printRow(String col1, String col2, String col3, String col4, String col5) {
         String columnFormat = "| %1s | %4s | %16s | %12s | %20s |";
+
+        switch (col4) {
+            case "Not Started":
+                col4 = Utils.RED + col4 + Utils.RESET + " ";
+                break;
+            case "In Progress":
+                col4 = Utils.YELLOW + col4 + Utils.RESET + " ";
+                break;
+            case "Complete":
+                col4 = Utils.GREEN + col4 + Utils.RESET + "    ";
+                break;
+            default:
+                break;
+        }
+        if (col5.length() > 20) {
+            col5 = col5.substring(0, 18) + "..";
+        }
         String row = String.format(columnFormat, col1, col2, col3, col4, col5);
         System.out.println(row);
     }
