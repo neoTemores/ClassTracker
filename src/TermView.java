@@ -28,7 +28,7 @@ public class TermView {
         Utils.printMenuHeader("Term View", "Main Menu");
 
         System.out.println();
-        Utils.printMenuItem("1", "See active terms");
+        Utils.printMenuItem("1", "Get active term");
         Utils.printMenuItem("2", "View all terms");
         Utils.printMenuItem("C", "Create new term");
         Utils.printMenuItem("Q", "Quit");
@@ -59,6 +59,7 @@ public class TermView {
         boolean isInSubMenu = true;
 
         while (isInSubMenu) {
+            Utils.loading();
             termList = termDAO.getTermList(isFilterByActive);
             Utils.clear();
             Utils.printMenuHeader("Term View", menuHeader);

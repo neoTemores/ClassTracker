@@ -14,6 +14,10 @@ public class Utils {
         System.out.println("\033[H\033[2J");
     }
 
+    public static void loading() {
+        System.out.print("\n> Loading...");
+    }
+
     public static String colorizeBool(Boolean isTrue) {
         String boolRed = RED + isTrue.toString() + RESET + " ".repeat(5);
         String boolGreen = GREEN + isTrue.toString() + RESET + " ".repeat(6);

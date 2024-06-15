@@ -30,6 +30,7 @@ public class AssignmentView {
     }
 
     private void mainMenu() {
+        Utils.loading();
         assignmentList = assignmentDAO.getAssignmentList(course.getId(), filteredWeekNum);
 
         Utils.clear();

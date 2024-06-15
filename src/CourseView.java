@@ -27,6 +27,7 @@ public class CourseView {
     }
 
     private void mainMenu() {
+        Utils.loading();
         courseList = courseDAO.getCourseList(term.getId());
 
         Utils.clear();
