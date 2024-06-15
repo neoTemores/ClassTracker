@@ -40,7 +40,7 @@ public class AssignmentView {
         printAssignmentList();
 
         System.out.println();
-        Utils.printMenuItem("W", "Filter by week #");
+        Utils.printMenuItem("W", "Filter by week");
         Utils.printCRUDmenu();
         Utils.printMenuSelection();
 
@@ -238,8 +238,14 @@ public class AssignmentView {
     }
 
     private void printAssignmentList() {
+        String hash = Utils.BLACK_BACKGROUND + Utils.WHITE + " # " + Utils.RESET;
+        String week = Utils.BLACK_BACKGROUND + Utils.WHITE + "Week" + Utils.RESET;
+        String name = Utils.BLACK_BACKGROUND + Utils.WHITE + " ".repeat(6) + "Name" + " ".repeat(6) + Utils.RESET;
+        String status = Utils.BLACK_BACKGROUND + Utils.WHITE + " ".repeat(3) + "Status" + " ".repeat(3) + Utils.RESET;
+        String notes = Utils.BLACK_BACKGROUND + Utils.WHITE + " ".repeat(13) + "Notes" + " ".repeat(13) + Utils.RESET;
         printLine();
-        printRow("#", "Week", "Name", "Status", "Notes");
+        // printRow("#", "Week", "Name", "Status", "Notes");
+        printRow(hash, week, name, status, notes);
         printLine();
 
         if (assignmentList.size() == 0) {
@@ -255,12 +261,12 @@ public class AssignmentView {
     }
 
     private void printLine() {
-        String horizonalLine = "+-----+------+------------------+--------------+" + "-".repeat(32) + "+";
+        String horizonalLine = "+-----+------+------------------+--------------+" + "-".repeat(33) + "+";
         System.out.println(horizonalLine);
     }
 
     private void printRow(String col1, String col2, String col3, String col4, String col5) {
-        String columnFormat = "| %3s | %4s | %16s | %12s | %30s |";
+        String columnFormat = "| %3s | %4s | %16s | %12s | %31s |";
 
         switch (col4) {
             case "Not Started":
@@ -276,17 +282,19 @@ public class AssignmentView {
                 break;
         }
 
-        if (col3.length() > 16) {
-            col3 = col3.substring(0, 14) + "..";
-        }
-        if (col5.length() > 30) {
-            col5 = col5.substring(0, 28) + "..";
-        }
         String row = String.format(columnFormat, col1, col2, col3, col4, col5);
         System.out.println(row);
     }
 
     private void printRow(int lineNum, int week, String name, Assignment.Status status, String notes) {
+
+        if (name.length() > 16) {
+            name = name.substring(0, 14) + "..";
+        }
+        if (notes.length() > 30) {
+            notes = notes.substring(0, 28) + "..";
+        }
+
         printRow(String.valueOf(lineNum), String.valueOf(week), name, status.getStatus(), notes);
     }
 }

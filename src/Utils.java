@@ -2,6 +2,7 @@ import java.sql.ResultSet;
 
 public class Utils {
     public final static String RESET = "\u001B[0m";
+    public final static String BLACK = "\u001B[30m";
     public final static String RED = "\u001B[31m";
     public final static String GREEN = "\u001B[32m";
     public final static String YELLOW = "\u001B[33m";
@@ -9,6 +10,15 @@ public class Utils {
     public final static String PURPLE = "\u001B[35m";
     public final static String CYAN = "\u001B[36m";
     public final static String WHITE = "\u001B[37m";
+
+    public static final String BLACK_BACKGROUND = "\u001B[40m";
+    public static final String RED_BACKGROUND = "\u001B[41m";
+    public static final String GREEN_BACKGROUND = "\u001B[42m";
+    public static final String YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String BLUE_BACKGROUND = "\u001B[44m";
+    public static final String PURPLE_BACKGROUND = "\u001B[45m";
+    public static final String CYAN_BACKGROUND = "\u001B[46m";
+    public static final String WHITE_BACKGROUND = "\u001B[47m";
 
     public static void clear() {
         System.out.println("\033[H\033[2J");

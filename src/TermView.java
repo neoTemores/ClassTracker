@@ -118,9 +118,13 @@ public class TermView {
     }
 
     private void printTermList() {
+        String hash = Utils.BLACK_BACKGROUND + Utils.WHITE + " # " + Utils.RESET;
+        String year = Utils.BLACK_BACKGROUND + Utils.WHITE + "Year" + Utils.RESET;
+        String term = Utils.BLACK_BACKGROUND + Utils.WHITE + "   Term   " + Utils.RESET;
+        String isActive = Utils.BLACK_BACKGROUND + Utils.WHITE + " isActive " + Utils.RESET;
 
         printLine();
-        printRow("#", "Year", "Term", "isActive");
+        printRow(hash, year, term, isActive);
         printLine();
 
         int lineNum = 1;
@@ -254,7 +258,9 @@ public class TermView {
 
     private void printRow(int lineNum, int year, String name, boolean isActive) {
         String colorizedBool = Utils.colorizeBool(isActive);
-
+        // String lineNumStr = Utils.BLACK_BACKGROUND + Utils.WHITE + " " +
+        // String.valueOf(lineNum) + " " + Utils.RESET;
+        // printRow(lineNumStr, String.valueOf(year), name, colorizedBool);
         printRow(String.valueOf(lineNum), String.valueOf(year), name, colorizedBool);
     }
 
