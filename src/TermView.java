@@ -245,18 +245,20 @@ public class TermView {
     }
 
     private void printRow(String col1, String col2, String col3, String col4) {
-        String columnFormat = "| %1s | %4s | %10s | %10s |";
+        String columnFormat = "| %3s | %4s | %10s | %10s |";
 
         String row = String.format(columnFormat, col1, col2, col3, col4);
         System.out.println(row);
     }
 
     private void printRow(int lineNum, int year, String name, boolean isActive) {
-        printRow(String.valueOf(lineNum), String.valueOf(year), name, String.valueOf(isActive));
+        String colorizedBool = Utils.colorizeBool(isActive);
+
+        printRow(String.valueOf(lineNum), String.valueOf(year), name, colorizedBool);
     }
 
     private void printLine() {
-        String horizonalLine = "+---+------+------------+------------+";
+        String horizonalLine = "+-----+------+------------+------------+";
 
         System.out.println(horizonalLine);
     }

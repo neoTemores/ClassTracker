@@ -12,21 +12,13 @@ public class Utils {
 
     public static void clear() {
         System.out.println("\033[H\033[2J");
+    }
 
-        String art = CYAN + """
-                N   N  EEEEEE  OOOOOO
-                NN  N  E       O    O
-                N N N  EEEEE   O    O
-                N  NN  E       O    O
-                N   N  EEEEEE  OOOOOO
-                """ + RESET;
+    public static String colorizeBool(Boolean bool) {
+        String boolRed = RED + bool.toString() + RESET + " ".repeat(5);
+        String boolGreen = GREEN + bool.toString() + RESET + " ".repeat(6);
 
-        String art2 = """
-                TTTTT RRRRR    A
-                  T   RRRRR   A A
-                  T   R    R A   A
-                """;
-        // System.out.println(art);
+        return Boolean.valueOf(bool) ? boolGreen : boolRed;
     }
 
     public static void showTempMsg(String msg) {
@@ -40,9 +32,11 @@ public class Utils {
 
     public static void printMenuHeader(String header, String subheader) {
         // TODO: add print here to view app name in color
+        String appTitle = CYAN + "Neo's Assignment Tracker App" + RESET;
+        System.out.println(appTitle + "\n");
 
-        String formattedHeader = String.format("%s |", header);
-        String formattedSubheader = String.format("-> %s |", subheader);
+        String formattedHeader = String.format("| %s |", header);
+        String formattedSubheader = String.format("| -> %s |", subheader);
 
         String topLine = generateUnderline(formattedHeader);
         String middleLine = generateUnderline(formattedHeader);
@@ -54,11 +48,11 @@ public class Utils {
             middleLine = "-" + middleLine;
         }
 
-        System.out.println(topLine);
+        System.out.println("+" + topLine);
         System.out.println(formattedHeader);
-        System.out.println(middleLine);
+        System.out.println("+" + middleLine);
         System.out.println(formattedSubheader);
-        System.out.println(bottomLine);
+        System.out.println("+" + bottomLine);
     }
 
     public static String getSubHeaderTitle(String subHeader, String subTitle) {
@@ -68,7 +62,7 @@ public class Utils {
 
     private static String generateUnderline(String title) {
         String underline = "+";
-        for (int i = 0; i < title.length() - 1; i++) {
+        for (int i = 1; i < title.length() - 1; i++) {
             underline = "-" + underline;
         }
         return underline;

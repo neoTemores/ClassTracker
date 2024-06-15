@@ -254,12 +254,12 @@ public class AssignmentView {
     }
 
     private void printLine() {
-        String horizonalLine = "+---+------+------------------+--------------+----------------------+";
+        String horizonalLine = "+-----+------+------------------+--------------+" + "-".repeat(32) + "+";
         System.out.println(horizonalLine);
     }
 
     private void printRow(String col1, String col2, String col3, String col4, String col5) {
-        String columnFormat = "| %1s | %4s | %16s | %12s | %20s |";
+        String columnFormat = "| %3s | %4s | %16s | %12s | %30s |";
 
         switch (col4) {
             case "Not Started":
@@ -269,13 +269,17 @@ public class AssignmentView {
                 col4 = Utils.YELLOW + col4 + Utils.RESET + " ";
                 break;
             case "Complete":
-                col4 = Utils.GREEN + col4 + Utils.RESET + "    ";
+                col4 = Utils.GREEN + col4 + Utils.RESET + " ".repeat(4);
                 break;
             default:
                 break;
         }
-        if (col5.length() > 20) {
-            col5 = col5.substring(0, 18) + "..";
+
+        if (col3.length() > 16) {
+            col3 = col3.substring(0, 14) + "..";
+        }
+        if (col5.length() > 30) {
+            col5 = col5.substring(0, 28) + "..";
         }
         String row = String.format(columnFormat, col1, col2, col3, col4, col5);
         System.out.println(row);

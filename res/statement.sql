@@ -8,7 +8,7 @@
 	create table course (
 		id int primary key auto_increment,
 		termId int,
-		code varchar(10),
+		code varchar(25),
 		name varchar(50),
 		foreign key(termId) references term(id) on delete cascade
 	);

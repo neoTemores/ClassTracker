@@ -190,19 +190,22 @@ public class CourseView {
     }
 
     private void printLine() {
-        String horizonalLine = "+---+------------+-------------------------------------+";
+        String horizonalLine = "+-----+------------+-------------------------------------+";
         System.out.println(horizonalLine);
     }
 
     private void printRow(String col1, String col2, String col3) {
-        String columnFormat = "| %1s | %10s | %35s |";
+        String columnFormat = "| %3s | %10s | %35s |";
         String row = String.format(columnFormat, col1, col2, col3);
         System.out.println(row);
     }
 
     private void printRow(int lineNum, String code, String name) {
-        if (name.length() > 32) {
-            name = name.substring(0, 32) + "...";
+        if (code.length() > 10) {
+            code = code.substring(0, 8) + "..";
+        }
+        if (name.length() > 35) {
+            name = name.substring(0, 33) + "..";
         }
         printRow(String.valueOf(lineNum), code, name);
     }
