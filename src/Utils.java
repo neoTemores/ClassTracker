@@ -14,11 +14,11 @@ public class Utils {
         System.out.println("\033[H\033[2J");
     }
 
-    public static String colorizeBool(Boolean bool) {
-        String boolRed = RED + bool.toString() + RESET + " ".repeat(5);
-        String boolGreen = GREEN + bool.toString() + RESET + " ".repeat(6);
+    public static String colorizeBool(Boolean isTrue) {
+        String boolRed = RED + isTrue.toString() + RESET + " ".repeat(5);
+        String boolGreen = GREEN + isTrue.toString() + RESET + " ".repeat(6);
 
-        return Boolean.valueOf(bool) ? boolGreen : boolRed;
+        return isTrue ? boolGreen : boolRed;
     }
 
     public static void showTempMsg(String msg) {
@@ -31,7 +31,6 @@ public class Utils {
     }
 
     public static void printMenuHeader(String header, String subheader) {
-        // TODO: add print here to view app name in color
         String appTitle = CYAN + "Neo's Assignment Tracker App" + RESET;
         System.out.println(appTitle + "\n");
 
