@@ -5,10 +5,28 @@ public class Utils {
     public final static String RED = "\u001B[31m";
     public final static String GREEN = "\u001B[32m";
     public final static String YELLOW = "\u001B[33m";
-    public final static String BLUE = ""; // cycle through 3Xm values to find header color
+    public final static String BLUE = "\u001B[34m";
+    public final static String PURPLE = "\u001B[35m";
+    public final static String CYAN = "\u001B[36m";
+    public final static String WHITE = "\u001B[37m";
 
     public static void clear() {
         System.out.println("\033[H\033[2J");
+
+        String art = CYAN + """
+                N   N  EEEEEE  OOOOOO
+                NN  N  E       O    O
+                N N N  EEEEE   O    O
+                N  NN  E       O    O
+                N   N  EEEEEE  OOOOOO
+                """ + RESET;
+
+        String art2 = """
+                TTTTT RRRRR    A
+                  T   RRRRR   A A
+                  T   R    R A   A
+                """;
+        // System.out.println(art);
     }
 
     public static void showTempMsg(String msg) {

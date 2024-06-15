@@ -67,6 +67,8 @@ public class AssignmentDAO {
             query += " WHERE courseID = ?";
         }
 
+        query += " ORDER BY week";
+
         connection.open();
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
