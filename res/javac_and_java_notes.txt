@@ -1,3 +1,4 @@
 javac -cp src:lib/mysql-connector-j-8.4.0.jar -d bin/ src/TrackerApp.java 
-javac -cp src:lib/mysql-connector-j-8.4.0.jar -d bin/ src/TrackerApp.java 
-this should be done from root dir
+java -cp bin:lib/mysql-connector-j-8.4.0.jar TrackerApp
+
+these cmds should be exec from project root dir
