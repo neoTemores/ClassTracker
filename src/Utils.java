@@ -119,7 +119,7 @@ public class Utils {
     }
 
     public static boolean confirm(String input) {
-        return input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes");
+        return input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes") || input.equals("1");
     }
 
     public static Term mapTerm(ResultSet data) {

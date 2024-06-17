@@ -107,8 +107,7 @@ public class AssignmentDAO {
             statement.setString(4, assignment.getNotes());
             statement.setInt(5, assignment.getId());
 
-            int res = statement.executeUpdate();
-            System.out.println(res + " assignment updated");
+            statement.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();

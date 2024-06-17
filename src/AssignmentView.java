@@ -41,6 +41,7 @@ public class AssignmentView {
 
         System.out.println();
         Utils.printMenuItem("W", "Filter by week");
+        Utils.printMenuItem("A", "Advance status");
         Utils.printCRUDmenu();
         Utils.printMenuSelection();
 
@@ -49,6 +50,10 @@ public class AssignmentView {
             case "w":
             case "W":
                 openFilterByWeekView();
+                break;
+            case "a":
+            case "A":
+                advanceStatus();
                 break;
             case "c":
             case "C":
@@ -86,6 +91,38 @@ public class AssignmentView {
 
         } else {
             Utils.showTempMsg("Error: Week must be a number!");
+        }
+    }
+
+    private void advanceStatus() {
+        System.out.print("< Enter assignment # to advance: ");
+        String input = scanner.nextLine();
+
+        if (input.matches("[0-9]+")) {
+            int courseIndex = Integer.parseInt(input) - 1;
+            if (courseIndex >= 0 && courseIndex < assignmentList.size()) {
+                Assignment assignment = assignmentList.get(courseIndex);
+
+                Assignment.Status status = assignment.getStatus();
+
+                if (status.equals(Assignment.Status.NOT_STARTED)) {
+                    status = Assignment.Status.IN_PROGRESS;
+                } else if (status.equals(Assignment.Status.IN_PROGRESS)) {
+                    status = Assignment.Status.COMPLETE;
+                }
+
+                // if new status != original status
+                if (!status.equals(assignment.getStatus())) {
+                    assignment.setStatus(status);
+                    assignmentDAO.updateAssignment(assignment);
+                }
+
+            } else {
+                Utils.showTempMsg("Error: Selected index is out of bounds!");
+            }
+
+        } else {
+            Utils.showTempMsg("Error: Must enter a number!");
         }
     }
 
