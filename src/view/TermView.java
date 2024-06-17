@@ -1,6 +1,12 @@
+package view;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import controller.TermDAO;
+import model.Term;
+import utils.Utils;
 
 public class TermView {
     private boolean isInTermView;

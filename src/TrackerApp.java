@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import view.TermView;
+
 public class TrackerApp {
     private static boolean isAppRunning;
 

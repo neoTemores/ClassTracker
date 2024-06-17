@@ -1,8 +1,14 @@
+package controller;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Term;
+import utils.DBconnection;
+import utils.Utils;
 
 public class TermDAO {
     private DBconnection connection;
@@ -33,7 +39,6 @@ public class TermDAO {
             statement.setBoolean(3, term.isActive());
 
             statement.executeUpdate();
-            Utils.showTempMsg("New Term Successfully Created!");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,7 +105,7 @@ public class TermDAO {
             statement.setInt(4, term.getId());
 
             statement.executeUpdate();
-            System.out.println("> Term Successfully Updated!");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,7 +121,7 @@ public class TermDAO {
             statement.setInt(1, id);
 
             statement.executeUpdate();
-            System.out.println("> Term Successfully Deleted!");
+
         } catch (Exception e) {
             e.printStackTrace();
         }

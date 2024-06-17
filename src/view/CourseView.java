@@ -1,6 +1,13 @@
+package view;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import controller.CourseDAO;
+import model.Course;
+import model.Term;
+import utils.Utils;
 
 public class CourseView {
     private boolean isInCourseView;

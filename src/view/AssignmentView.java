@@ -1,6 +1,14 @@
+package view;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import controller.AssignmentDAO;
+import model.Assignment;
+import model.Assignment.Status;
+import model.Course;
+import utils.Utils;
 
 public class AssignmentView {
     private boolean isInAssignmentView;
@@ -103,12 +111,12 @@ public class AssignmentView {
             if (courseIndex >= 0 && courseIndex < assignmentList.size()) {
                 Assignment assignment = assignmentList.get(courseIndex);
 
-                Assignment.Status status = assignment.getStatus();
+                Status status = assignment.getStatus();
 
-                if (status.equals(Assignment.Status.NOT_STARTED)) {
-                    status = Assignment.Status.IN_PROGRESS;
-                } else if (status.equals(Assignment.Status.IN_PROGRESS)) {
-                    status = Assignment.Status.COMPLETE;
+                if (status.equals(Status.NOT_STARTED)) {
+                    status = Status.IN_PROGRESS;
+                } else if (status.equals(Status.IN_PROGRESS)) {
+                    status = Status.COMPLETE;
                 }
 
                 // if new status != original status
@@ -137,7 +145,7 @@ public class AssignmentView {
             System.out.print("< Name: ");
             String name = scanner.nextLine();
 
-            Assignment.Status status = getStatusInput();
+            Status status = getStatusInput();
 
             System.out.print("< Notes: ");
             String notes = scanner.nextLine();
@@ -155,33 +163,33 @@ public class AssignmentView {
         }
     }
 
-    private Assignment.Status getStatusInput() {
+    private Status getStatusInput() {
         printGetStatusInstructions();
-        Assignment.Status status = parseStatus(scanner.nextLine());
+        Status status = parseStatus(scanner.nextLine());
 
         return status;
     }
 
     private void printGetStatusInstructions() {
         System.out.println();
-        Utils.printMenuItem("1", Utils.RED + Assignment.Status.NOT_STARTED.getStatus() + Utils.RESET);
-        Utils.printMenuItem("2", Utils.YELLOW + Assignment.Status.IN_PROGRESS.getStatus() + Utils.RESET);
-        Utils.printMenuItem("3", Utils.GREEN + Assignment.Status.COMPLETE.getStatus() + Utils.RESET);
+        Utils.printMenuItem("1", Utils.RED + Status.NOT_STARTED.getStatus() + Utils.RESET);
+        Utils.printMenuItem("2", Utils.YELLOW + Status.IN_PROGRESS.getStatus() + Utils.RESET);
+        Utils.printMenuItem("3", Utils.GREEN + Status.COMPLETE.getStatus() + Utils.RESET);
 
         System.out.print("< Status: ");
     }
 
-    private Assignment.Status parseStatus(String input) {
-        Assignment.Status status;
+    private Status parseStatus(String input) {
+        Status status;
         switch (input) {
             case "2":
-                status = Assignment.Status.IN_PROGRESS;
+                status = Status.IN_PROGRESS;
                 break;
             case "3":
-                status = Assignment.Status.COMPLETE;
+                status = Status.COMPLETE;
                 break;
             default:
-                status = Assignment.Status.NOT_STARTED;
+                status = Status.NOT_STARTED;
                 break;
         }
 
@@ -217,7 +225,7 @@ public class AssignmentView {
 
                 printGetStatusInstructions();
                 String statusStr = scanner.nextLine().trim();
-                Assignment.Status status;
+                Status status;
                 if (statusStr.isBlank()) {
                     status = assignment.getStatus();
                 } else {
@@ -323,7 +331,7 @@ public class AssignmentView {
         System.out.println(row);
     }
 
-    private void printRow(int lineNum, int week, String name, Assignment.Status status, String notes) {
+    private void printRow(int lineNum, int week, String name, Status status, String notes) {
 
         if (name.length() > 16) {
             name = name.substring(0, 14) + "..";

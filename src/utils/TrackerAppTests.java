@@ -1,4 +1,13 @@
+package utils;
+
 import java.util.List;
+
+import controller.AssignmentDAO;
+import controller.CourseDAO;
+import controller.TermDAO;
+import model.Assignment;
+import model.Course;
+import model.Term;
 
 public class TrackerAppTests {
 

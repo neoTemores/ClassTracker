@@ -1,15 +1,23 @@
+package utils;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBconnection {
+    // Default values:
+    private static final String URL = "jdbc:mysql://localhost:3306/neo";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "admin";
+
+    // Instance values:
     private String url;
     private String username;
     private String password;
     private Connection connection;
 
     public DBconnection() {
-        this("jdbc:mysql://localhost:3306/neo", "root", "admin");
+        this(URL, USERNAME, PASSWORD);
     }
 
     public DBconnection(String url, String username, String password) {

@@ -1,4 +1,10 @@
+package utils;
+
 import java.sql.ResultSet;
+
+import model.Assignment;
+import model.Course;
+import model.Term;
 
 public class Utils {
     public final static String RESET = "\u001B[0m";

@@ -1,3 +1,5 @@
+package model;
+
 public class Term {
     private int id;
     private String name;

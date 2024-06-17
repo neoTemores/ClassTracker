@@ -1,7 +1,13 @@
+package controller;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Assignment;
+import utils.DBconnection;
+import utils.Utils;
 
 public class AssignmentDAO {
     private DBconnection connection;
@@ -27,7 +33,6 @@ public class AssignmentDAO {
             statement.setString(5, assignment.getNotes());
 
             statement.executeUpdate();
-            Utils.showTempMsg("New Assignment Successfully Created!");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,8 +128,7 @@ public class AssignmentDAO {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setInt(1, id);
 
-            int res = statement.executeUpdate();
-            System.out.println(res + " assignment deleted");
+            statement.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();

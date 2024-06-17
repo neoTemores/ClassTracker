@@ -1,7 +1,13 @@
+package controller;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Course;
+import utils.DBconnection;
+import utils.Utils;
 
 public class CourseDAO {
     private DBconnection connection;
@@ -25,7 +31,6 @@ public class CourseDAO {
             statement.setString(3, course.getName());
 
             statement.executeUpdate();
-            Utils.showTempMsg("New Course Successfully Created!");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,8 +97,8 @@ public class CourseDAO {
             statement.setString(2, course.getName());
             statement.setInt(3, course.getId());
 
-            int res = statement.executeUpdate();
-            System.out.println(res + " course updated");
+            statement.executeUpdate();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -109,8 +114,7 @@ public class CourseDAO {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
             statement.setInt(1, id);
 
-            int res = statement.executeUpdate();
-            System.out.println(res + " course deleted");
+            statement.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
