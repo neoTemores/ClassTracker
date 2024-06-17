@@ -11,5 +11,4 @@ public class TrackerApp {
             isAppRunning = termView.open();
         }
     }
-
 }

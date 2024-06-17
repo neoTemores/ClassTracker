@@ -26,8 +26,9 @@ public class AssignmentDAO {
             statement.setString(4, assignment.getStatus().toString());
             statement.setString(5, assignment.getNotes());
 
-            int res = statement.executeUpdate();
-            System.out.println(res + " assignment inserted");
+            statement.executeUpdate();
+            Utils.showTempMsg("New Assignment Successfully Created!");
+
         } catch (Exception e) {
             e.printStackTrace();
         }

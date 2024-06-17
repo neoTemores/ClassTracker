@@ -24,8 +24,9 @@ public class CourseDAO {
             statement.setString(2, course.getCode());
             statement.setString(3, course.getName());
 
-            int res = statement.executeUpdate();
-            System.out.println(res + " new course record inserted");
+            statement.executeUpdate();
+            Utils.showTempMsg("New Course Successfully Created!");
+
         } catch (Exception e) {
             e.printStackTrace();
         }

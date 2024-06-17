@@ -38,7 +38,7 @@ public class TermView {
 
         switch (selection) {
             case "1":
-                showTermsMenu("Active Terms", true);
+                showTermsMenu("Active Term", true);
                 break;
             case "2":
                 showTermsMenu("All Terms", false);
@@ -257,11 +257,8 @@ public class TermView {
     }
 
     private void printRow(int lineNum, int year, String name, boolean isActive) {
-        String colorizedBool = Utils.colorizeBool(isActive);
-        // String lineNumStr = Utils.BLACK_BACKGROUND + Utils.WHITE + " " +
-        // String.valueOf(lineNum) + " " + Utils.RESET;
-        // printRow(lineNumStr, String.valueOf(year), name, colorizedBool);
-        printRow(String.valueOf(lineNum), String.valueOf(year), name, colorizedBool);
+
+        printRow(Utils.colorizeLineNum(lineNum), String.valueOf(year), name, Utils.colorizeBool(isActive));
     }
 
     private void printLine() {

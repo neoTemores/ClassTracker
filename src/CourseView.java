@@ -213,6 +213,6 @@ public class CourseView {
         if (name.length() > 35) {
             name = name.substring(0, 33) + "..";
         }
-        printRow(String.valueOf(lineNum), code, name);
+        printRow(Utils.colorizeLineNum(lineNum), code, name);
     }
 }

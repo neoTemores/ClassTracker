@@ -35,8 +35,25 @@ public class Utils {
         return isTrue ? boolGreen : boolRed;
     }
 
+    public static String colorizeLineNum(int lineNum) {
+        String colorizedLineNume = String.valueOf(lineNum);
+        int length = colorizedLineNume.length();
+
+        if (length == 1) {
+            colorizedLineNume = " " + colorizedLineNume + " ";
+        }
+
+        colorizedLineNume = BLACK_BACKGROUND + WHITE + colorizedLineNume + RESET;
+
+        if (length == 2) {
+            colorizedLineNume = " " + colorizedLineNume;
+        }
+
+        return colorizedLineNume;
+    }
+
     public static void showTempMsg(String msg) {
-        System.out.println("> ** " + msg + " **");
+        System.out.println("\n> ** " + msg + " **");
         try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
@@ -46,7 +63,10 @@ public class Utils {
 
     public static void printMenuHeader(String header, String subheader) {
         String appTitle = CYAN + "Neo's Assignment Tracker App" + RESET;
-        System.out.println(appTitle + "\n");
+        String outline = "-".repeat(appTitle.length() - 9);
+        // System.out.println(outline);
+        System.out.println(appTitle);
+        System.out.println(outline + "\n");
 
         String formattedHeader = String.format("| %s |", header);
         String formattedSubheader = String.format("| -> %s |", subheader);

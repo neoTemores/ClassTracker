@@ -15,6 +15,13 @@ public class TermDAO {
         this.connection = connection;
     }
 
+    public void insertTestData(int amount) {
+        for (int i = 0; i < amount; i++) {
+            Term term = new Term(0, "Test" + i, i, false);
+            createTerm(term);
+        }
+    }
+
     public void createTerm(Term term) {
         String query = "INSERT INTO term (name, year, isActive) VALUES(?, ?, ?)";
 
@@ -25,8 +32,8 @@ public class TermDAO {
             statement.setInt(2, term.getYear());
             statement.setBoolean(3, term.isActive());
 
-            int res = statement.executeUpdate();
-            System.out.println("\n> New Term Successfully Created!");
+            statement.executeUpdate();
+            Utils.showTempMsg("New Term Successfully Created!");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,7 +70,7 @@ public class TermDAO {
         if (isFilterByActive) {
             query += " WHERE isActive = true";
         }
-        query += " ORDER BY id DESC";
+        // query += " ORDER BY id DESC";
         connection.open();
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);

@@ -34,7 +34,7 @@ public class AssignmentView {
         assignmentList = assignmentDAO.getAssignmentList(course.getId(), filteredWeekNum);
 
         Utils.clear();
-        String header = isFilteredByWeek ? "Filtered by week # " + filteredWeekNum : "All assignments";
+        String header = isFilteredByWeek ? "Filtered by week # " + filteredWeekNum : "All Assignments";
         Utils.printMenuHeader("Assignment View", Utils.getSubHeaderTitle(header, courseTitle));
 
         printAssignmentList();
@@ -295,6 +295,6 @@ public class AssignmentView {
             notes = notes.substring(0, 28) + "..";
         }
 
-        printRow(String.valueOf(lineNum), String.valueOf(week), name, status.getStatus(), notes);
+        printRow(Utils.colorizeLineNum(lineNum), String.valueOf(week), name, status.getStatus(), notes);
     }
 }
