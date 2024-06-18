@@ -103,14 +103,13 @@ public class JoinedAssignmentView {
     }
 
     private void printJoinedAssignmentList() {
-        String color = Utils.BLACK_BACKGROUND + Utils.WHITE;
-        String hash = color + " # " + Utils.RESET;
-        String code = color + " ".repeat(3) + "Code" + " ".repeat(3) + Utils.RESET;
-        String courseName = color + " ".repeat(12) + "Course Name" + " ".repeat(12) + Utils.RESET;
-        String week = color + "Week" + Utils.RESET;
-        String assignment = color + " ".repeat(3) + "Assignment" + " ".repeat(3) + Utils.RESET;
-        String status = color + " ".repeat(3) + "Status" + " ".repeat(3) + Utils.RESET;
-        String notes = color + " ".repeat(13) + "Notes" + " ".repeat(13) + Utils.RESET;
+        String hash = Utils.colorizeTableHeader("#", 1);
+        String code = Utils.colorizeTableHeader("Code", 3);
+        String courseName = Utils.colorizeTableHeader("Course Name", 12);
+        String week = Utils.colorizeTableHeader("Week", 0);
+        String assignment = Utils.colorizeTableHeader("Assignment", 3);
+        String status = Utils.colorizeTableHeader("Status", 3);
+        String notes = Utils.colorizeTableHeader("Notes", 13);
 
         printLine();
         printRow(hash, code, courseName, week, assignment, status, notes);

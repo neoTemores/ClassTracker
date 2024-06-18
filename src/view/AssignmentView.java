@@ -283,6 +283,7 @@ public class AssignmentView {
         }
     }
 
+    // Refactor using Utils.colorizeTableHeader()
     private void printAssignmentList() {
         String color = Utils.BLACK_BACKGROUND + Utils.WHITE;
         String hash = color + " # " + Utils.RESET;

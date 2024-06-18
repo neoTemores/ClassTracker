@@ -38,6 +38,12 @@ public class Utils {
         System.out.print("\n> Loading...");
     }
 
+    public static String colorizeTableHeader(String header, int padding) {
+        String color = BLACK_BACKGROUND + WHITE;
+        String headerFmt = "%s%s%s%s%s";
+        return String.format(headerFmt, color, " ".repeat(padding), header, " ".repeat(padding), RESET);
+    }
+
     public static String colorizeStatus(String status) {
         String colorizedStatus = null;
 

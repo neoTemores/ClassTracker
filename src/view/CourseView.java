@@ -198,6 +198,7 @@ public class CourseView {
         }
     }
 
+    // Refactor using Utils.colorizeTableHeader()
     private void printCourseList() {
         String hash = Utils.BLACK_BACKGROUND + Utils.WHITE + " # " + Utils.RESET;
         String code = Utils.BLACK_BACKGROUND + Utils.WHITE + " ".repeat(3) + "Code" + " ".repeat(3) + Utils.RESET;

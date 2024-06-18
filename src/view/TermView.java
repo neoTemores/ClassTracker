@@ -132,6 +132,7 @@ public class TermView {
 
     }
 
+    // Refactor using Utils.colorizeTableHeader()
     private void printTermList() {
         String hash = Utils.BLACK_BACKGROUND + Utils.WHITE + " # " + Utils.RESET;
         String year = Utils.BLACK_BACKGROUND + Utils.WHITE + "Year" + Utils.RESET;
@@ -151,7 +152,6 @@ public class TermView {
     }
 
     private void openCourseView(Term term) {
-        // Mimic the loop structure from this class
         CourseView courseView = new CourseView(term);
         courseView.open();
     }
