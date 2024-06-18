@@ -87,7 +87,7 @@ public class CourseView {
                     System.exit(0);
                     break;
                 default:
-                    String msg = "Error: Invalid input! (%s)";
+                    String msg = "Error: Invalid input! '%s'";
                     Utils.showTempMsg(String.format(msg, input));
                     break;
             }
