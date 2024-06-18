@@ -4,9 +4,10 @@ public class JoinedAssignment extends Assignment {
     private String courseCode;
     private String courseName;
 
-    public JoinedAssignment(int id, int courseId, int week, String name, Status status, String notes, String courseCode,
+    public JoinedAssignment(int assignmentId, int courseId, int week, String assignmentName, Status status,
+            String notes, String courseCode,
             String courseName) {
-        super(id, courseId, week, name, status, notes);
+        super(assignmentId, courseId, week, assignmentName, status, notes);
         this.courseCode = courseCode;
         this.courseName = courseName;
     }

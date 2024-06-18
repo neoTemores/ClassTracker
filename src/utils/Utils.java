@@ -3,7 +3,9 @@ package utils;
 import java.sql.ResultSet;
 
 import model.Assignment;
+import model.Assignment.Status;
 import model.Course;
+import model.JoinedAssignment;
 import model.Term;
 
 public class Utils {
@@ -34,6 +36,26 @@ public class Utils {
 
     public static void loading() {
         System.out.print("\n> Loading...");
+    }
+
+    public static String colorizeStatus(String status) {
+        String colorizedStatus = null;
+
+        switch (status) {
+            case "Not Started":
+                colorizedStatus = Utils.RED + status + Utils.RESET + " ";
+                break;
+            case "In Progress":
+                colorizedStatus = Utils.YELLOW + status + Utils.RESET + " ";
+                break;
+            case "Complete":
+                colorizedStatus = Utils.GREEN + status + Utils.RESET + " ".repeat(4);
+                break;
+            default:
+                colorizedStatus = status;
+                break;
+        }
+        return colorizedStatus;
     }
 
     public static String colorizeBool(Boolean isTrue) {
@@ -137,7 +159,9 @@ public class Utils {
             String name = data.getString("name");
             int year = data.getInt("year");
             boolean isActive = data.getBoolean("isActive");
+
             term = new Term(id, name, year, isActive);
+
         } catch (Exception e) {
             Utils.showTempMsg(e.toString());
         }
@@ -151,7 +175,9 @@ public class Utils {
             int termId = data.getInt("termId");
             String code = data.getString("code");
             String name = data.getString("name");
+
             course = new Course(id, termId, code, name);
+
         } catch (Exception e) {
             Utils.showTempMsg(e.toString());
         }
@@ -165,13 +191,36 @@ public class Utils {
             int courseId = data.getInt("courseId");
             int week = data.getInt("week");
             String name = data.getString("name");
-            Assignment.Status status = Assignment.Status.valueOf(data.getString("status"));
+            Status status = Status.valueOf(data.getString("status"));
             String notes = data.getString("notes");
+
             assignment = new Assignment(id, courseId, week, name, status, notes);
 
         } catch (Exception e) {
             Utils.showTempMsg(e.toString());
         }
         return assignment;
+    }
+
+    public static JoinedAssignment mapJoinedAssignment(ResultSet data) {
+        JoinedAssignment joinedAssignment = null;
+        try {
+            String courseCode = data.getString("code");
+            String courseName = data.getString("courseName");
+            int assignmentId = data.getInt("assignmentId");
+            int courseId = data.getInt("courseId");
+            int week = data.getInt("week");
+            String assignmentName = data.getString("assignmentName");
+            Status status = Status.valueOf(data.getString("status"));
+            String notes = data.getString("notes");
+
+            joinedAssignment = new JoinedAssignment(assignmentId, courseId, week, assignmentName, status, notes,
+                    courseCode, courseName);
+
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
+        }
+
+        return joinedAssignment;
     }
 }

@@ -9,7 +9,7 @@ import utils.DBconnection;
 import utils.Utils;
 
 public class AssignmentDAO {
-    private DBconnection connection;
+    protected DBconnection connection;
 
     public AssignmentDAO() {
         this(new DBconnection());

@@ -50,6 +50,7 @@ public class CourseView {
         }
         System.out.println();
         Utils.printMenuItem("#", option1);
+        Utils.printMenuItem("A", "All assignments");
         Utils.printCRUDmenu();
         Utils.printMenuSelection();
 
@@ -64,6 +65,10 @@ public class CourseView {
             }
         } else {
             switch (input) {
+                case "a":
+                case "A":
+                    openJoinedAssignmentView(term);
+                    break;
                 case "c":
                 case "C":
                     createCourse();
@@ -97,6 +102,11 @@ public class CourseView {
     private void openAssignmentView(Course course) {
         AssignmentView assignmentView = new AssignmentView(course);
         assignmentView.open();
+    }
+
+    private void openJoinedAssignmentView(Term term) {
+        JoinedAssignmentView joinedAssignmentView = new JoinedAssignmentView(term);
+        joinedAssignmentView.open();
     }
 
     private void createCourse() {
@@ -211,9 +221,9 @@ public class CourseView {
         System.out.println(horizonalLine);
     }
 
-    private void printRow(String col1, String col2, String col3) {
+    private void printRow(String lineNum, String code, String name) {
         String columnFormat = "| %3s | %10s | %35s |";
-        String row = String.format(columnFormat, col1, col2, col3);
+        String row = String.format(columnFormat, lineNum, code, name);
         System.out.println(row);
     }
 

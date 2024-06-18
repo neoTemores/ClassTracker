@@ -11,12 +11,12 @@ import model.Course;
 import utils.Utils;
 
 public class AssignmentView {
-    private boolean isInAssignmentView;
-    private boolean isFilteredByWeek;
-    private int filteredWeekNum;
+    protected boolean isInAssignmentView;
+    protected boolean isFilteredByWeek;
+    protected int filteredWeekNum;
+    protected List<Assignment> assignmentList;
+    protected final Scanner scanner;
     private final AssignmentDAO assignmentDAO;
-    private List<Assignment> assignmentList;
-    private final Scanner scanner;
     private final Course course;
     private final String courseTitle;
 
@@ -24,11 +24,15 @@ public class AssignmentView {
         isInAssignmentView = true;
         isFilteredByWeek = false;
         filteredWeekNum = 0;
-        assignmentDAO = new AssignmentDAO();
-        scanner = new Scanner(System.in);
-        this.course = course;
         assignmentList = new ArrayList<>();
-        courseTitle = course.getCode() + " " + course.getName();
+        scanner = new Scanner(System.in);
+        assignmentDAO = new AssignmentDAO();
+        this.course = course;
+        if (course != null) {
+            courseTitle = course.getCode() + " " + course.getName();
+        } else {
+            courseTitle = "";
+        }
     }
 
     public void open() {
@@ -92,7 +96,7 @@ public class AssignmentView {
         }
     }
 
-    private void openFilterByWeekView() {
+    protected void openFilterByWeekView() {
         System.out.print("< Enter week # to filter by (0 = all): ");
         String input = scanner.nextLine();
 
@@ -285,11 +289,12 @@ public class AssignmentView {
     }
 
     private void printAssignmentList() {
-        String hash = Utils.BLACK_BACKGROUND + Utils.WHITE + " # " + Utils.RESET;
-        String week = Utils.BLACK_BACKGROUND + Utils.WHITE + "Week" + Utils.RESET;
-        String name = Utils.BLACK_BACKGROUND + Utils.WHITE + " ".repeat(6) + "Name" + " ".repeat(6) + Utils.RESET;
-        String status = Utils.BLACK_BACKGROUND + Utils.WHITE + " ".repeat(3) + "Status" + " ".repeat(3) + Utils.RESET;
-        String notes = Utils.BLACK_BACKGROUND + Utils.WHITE + " ".repeat(13) + "Notes" + " ".repeat(13) + Utils.RESET;
+        String color = Utils.BLACK_BACKGROUND + Utils.WHITE;
+        String hash = color + " # " + Utils.RESET;
+        String week = color + "Week" + Utils.RESET;
+        String name = color + " ".repeat(6) + "Name" + " ".repeat(6) + Utils.RESET;
+        String status = color + " ".repeat(3) + "Status" + " ".repeat(3) + Utils.RESET;
+        String notes = color + " ".repeat(13) + "Notes" + " ".repeat(13) + Utils.RESET;
         printLine();
         printRow(hash, week, name, status, notes);
         printLine();
@@ -307,28 +312,17 @@ public class AssignmentView {
     }
 
     private void printLine() {
-        String horizonalLine = "+-----+------+------------------+--------------+" + "-".repeat(33) + "+";
+        String horizonalLine = "+" + "-".repeat(5) + "+------+------------------+--------------+" + "-".repeat(33)
+                + "+";
         System.out.println(horizonalLine);
     }
 
-    private void printRow(String col1, String col2, String col3, String col4, String col5) {
+    private void printRow(String lineNum, String week, String name, String status, String notes) {
         String columnFormat = "| %3s | %4s | %16s | %12s | %31s |";
 
-        switch (col4) {
-            case "Not Started":
-                col4 = Utils.RED + col4 + Utils.RESET + " ";
-                break;
-            case "In Progress":
-                col4 = Utils.YELLOW + col4 + Utils.RESET + " ";
-                break;
-            case "Complete":
-                col4 = Utils.GREEN + col4 + Utils.RESET + " ".repeat(4);
-                break;
-            default:
-                break;
-        }
+        status = Utils.colorizeStatus(status);
 
-        String row = String.format(columnFormat, col1, col2, col3, col4, col5);
+        String row = String.format(columnFormat, lineNum, week, name, status, notes);
         System.out.println(row);
     }
 
