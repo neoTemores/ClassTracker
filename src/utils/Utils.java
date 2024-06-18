@@ -71,13 +71,10 @@ public class Utils {
 
         if (length == 1) {
             colorizedLineNume = " " + colorizedLineNume + " ";
-        }
-
-        colorizedLineNume = BLACK_BACKGROUND + WHITE + colorizedLineNume + RESET;
-
-        if (length == 2) {
+        } else if (length == 2) {
             colorizedLineNume = " " + colorizedLineNume;
         }
+        colorizedLineNume = BLACK_BACKGROUND + WHITE + colorizedLineNume + RESET;
 
         return colorizedLineNume;
     }

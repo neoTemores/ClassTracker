@@ -42,7 +42,7 @@ public class JoinedAssignmentView {
         joinedAssignmentList = joinedAssignmentDAO.getJoinedAssignmentList(term.getId(), filteredWeekNum);
 
         Utils.clear();
-        String header = isFilteredByWeek ? "Filtered by week # " + filteredWeekNum : "All Assignments in Term";
+        String header = isFilteredByWeek ? "Filtered by week # " + filteredWeekNum : "All Assignments";
         Utils.printMenuHeader("Assignment by Term View", Utils.getSubHeaderTitle(header, termTitle));
 
         printJoinedAssignmentList();
@@ -104,13 +104,13 @@ public class JoinedAssignmentView {
 
     private void printJoinedAssignmentList() {
         String color = Utils.BLACK_BACKGROUND + Utils.WHITE;
-        String hash = "#";
-        String code = "Code";
-        String courseName = "Course Name";
-        String week = "Week";
-        String assignment = "Assignment";
-        String status = "Status";
-        String notes = "Notes";
+        String hash = color + " # " + Utils.RESET;
+        String code = color + " ".repeat(3) + "Code" + " ".repeat(3) + Utils.RESET;
+        String courseName = color + " ".repeat(12) + "Course Name" + " ".repeat(12) + Utils.RESET;
+        String week = color + "Week" + Utils.RESET;
+        String assignment = color + " ".repeat(3) + "Assignment" + " ".repeat(3) + Utils.RESET;
+        String status = color + " ".repeat(3) + "Status" + " ".repeat(3) + Utils.RESET;
+        String notes = color + " ".repeat(13) + "Notes" + " ".repeat(13) + Utils.RESET;
 
         printLine();
         printRow(hash, code, courseName, week, assignment, status, notes);
@@ -140,7 +140,7 @@ public class JoinedAssignmentView {
             String notes) {
         String columnFormat = "| %3s | %10s | %35s | %4s | %16s | %12s | %31s |";
 
-        // status = Utils.colorizeStatus(status);
+        status = Utils.colorizeStatus(status);
         String row = String.format(columnFormat, lineNum, code, courseName, week, assignmentName, status, notes);
         System.out.println(row);
     }
@@ -155,6 +155,7 @@ public class JoinedAssignmentView {
             notes = notes.substring(0, 28) + "..";
         }
 
-        printRow(String.valueOf(lineNum), code, courseName, String.valueOf(week), assignment, status.toString(), notes);
+        printRow(Utils.colorizeLineNum(lineNum), code, courseName, String.valueOf(week), assignment, status.getStatus(),
+                notes);
     }
 }
