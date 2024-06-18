@@ -291,7 +291,6 @@ public class AssignmentView {
         String status = Utils.BLACK_BACKGROUND + Utils.WHITE + " ".repeat(3) + "Status" + " ".repeat(3) + Utils.RESET;
         String notes = Utils.BLACK_BACKGROUND + Utils.WHITE + " ".repeat(13) + "Notes" + " ".repeat(13) + Utils.RESET;
         printLine();
-        // printRow("#", "Week", "Name", "Status", "Notes");
         printRow(hash, week, name, status, notes);
         printLine();
 

@@ -13,17 +13,17 @@ public class TrackerAppTests {
 
     public static void testChainDelete() {
         TermDAO termDAO = new TermDAO();
-        // termDAO.createTerm(new Term());
+        termDAO.createTerm(new Term());
 
         CourseDAO courseDAO = new CourseDAO();
         Course course = new Course();
         course.setTermId(2);
-        // courseDAO.createCourse(course);
+        courseDAO.createCourse(course);
 
         AssignmentDAO assignmentDAO = new AssignmentDAO();
         Assignment assignment = new Assignment();
         assignment.setCourseId(2);
-        // assignmentDAO.createAssignment(assignment);
+        assignmentDAO.createAssignment(assignment);
 
         termDAO.deleteTerm(0);
     }
