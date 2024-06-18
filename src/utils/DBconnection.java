@@ -9,6 +9,7 @@ public class DBconnection {
     private static final String URL = "jdbc:mysql://localhost:3306/neo";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "admin";
+    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
     // Instance values:
     private String url;
@@ -28,9 +29,9 @@ public class DBconnection {
 
     public void verifyDriver() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
     }
 
@@ -39,8 +40,8 @@ public class DBconnection {
 
         try {
             this.connection = DriverManager.getConnection(url, username, password);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
         }
     }
 
@@ -51,8 +52,8 @@ public class DBconnection {
     public void close() {
         try {
             this.connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
         }
     }
 

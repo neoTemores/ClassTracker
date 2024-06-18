@@ -203,13 +203,11 @@ public class TermView {
 
                 System.out.print("< isActive (t/f): ");
                 String isActiveStr = scanner.nextLine().trim();
-                boolean isActive;
+                boolean isActive = term.isActive();
                 if (isActiveStr.equalsIgnoreCase("t") || isActiveStr.equalsIgnoreCase("true")) {
                     isActive = true;
                 } else if (isActiveStr.equalsIgnoreCase("f") || isActiveStr.equalsIgnoreCase("false")) {
                     isActive = false;
-                } else {
-                    isActive = term.isActive();
                 }
 
                 term.setName(name);

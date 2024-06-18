@@ -7,6 +7,8 @@ import model.Course;
 import model.Term;
 
 public class Utils {
+    public final static String CLEAR_SCREEN = "\033[H\033[2J";
+
     public final static String RESET = "\u001B[0m";
     public final static String BLACK = "\u001B[30m";
     public final static String RED = "\u001B[31m";
@@ -27,7 +29,7 @@ public class Utils {
     public static final String WHITE_BACKGROUND = "\u001B[47m";
 
     public static void clear() {
-        System.out.println("\033[H\033[2J");
+        System.out.println(CLEAR_SCREEN);
     }
 
     public static void loading() {
@@ -137,7 +139,7 @@ public class Utils {
             boolean isActive = data.getBoolean("isActive");
             term = new Term(id, name, year, isActive);
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         return term;
     }
@@ -151,7 +153,7 @@ public class Utils {
             String name = data.getString("name");
             course = new Course(id, termId, code, name);
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         return course;
     }
@@ -168,7 +170,7 @@ public class Utils {
             assignment = new Assignment(id, courseId, week, name, status, notes);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         return assignment;
     }

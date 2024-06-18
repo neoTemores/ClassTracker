@@ -2,10 +2,8 @@ package controller;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Term;
 import utils.DBconnection;
 import utils.Utils;
@@ -40,8 +38,8 @@ public class TermDAO {
 
             statement.executeUpdate();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
     }
@@ -61,8 +59,8 @@ public class TermDAO {
                 term = Utils.mapTerm(data);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
 
@@ -85,8 +83,8 @@ public class TermDAO {
             while (data.next()) {
                 termList.add(Utils.mapTerm(data));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
 
@@ -107,7 +105,7 @@ public class TermDAO {
             statement.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
     }
@@ -123,7 +121,7 @@ public class TermDAO {
             statement.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
     }

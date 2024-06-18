@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Assignment;
 import utils.DBconnection;
 import utils.Utils;
@@ -35,7 +34,7 @@ public class AssignmentDAO {
             statement.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
     }
@@ -56,7 +55,7 @@ public class AssignmentDAO {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
 
@@ -93,7 +92,7 @@ public class AssignmentDAO {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
 
@@ -115,7 +114,7 @@ public class AssignmentDAO {
             statement.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
     }
@@ -131,7 +130,7 @@ public class AssignmentDAO {
             statement.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
     }

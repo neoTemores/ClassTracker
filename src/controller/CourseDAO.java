@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
 import model.Course;
 import utils.DBconnection;
 import utils.Utils;
@@ -33,7 +32,7 @@ public class CourseDAO {
             statement.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
     }
@@ -54,7 +53,7 @@ public class CourseDAO {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
 
@@ -80,7 +79,7 @@ public class CourseDAO {
                 courseList.add(Utils.mapCourse(data));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
 
@@ -100,7 +99,7 @@ public class CourseDAO {
             statement.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
 
         connection.close();
@@ -117,7 +116,7 @@ public class CourseDAO {
             statement.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Utils.showTempMsg(e.toString());
         }
         connection.close();
     }
