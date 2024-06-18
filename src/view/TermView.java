@@ -53,11 +53,16 @@ public class TermView {
             case "C":
                 createTerm();
                 break;
-            case "":
+            case "q":
+            case "Q":
+                scanner.close();
+                Utils.showTempMsg("Goodbye!");
+                this.isInTermView = false;
                 break;
             default:
-                this.isInTermView = false;
-                scanner.close();
+                String msg = "Error: Invalid input! '%s'";
+                Utils.showTempMsg(String.format(msg, selection));
+                break;
         }
     }
 
@@ -111,11 +116,15 @@ public class TermView {
                     case "B":
                         isInSubMenu = false;
                         break;
-                    case "":
+                    case "q":
+                    case "Q":
+                        scanner.close();
+                        Utils.showTempMsg("Goodbye!");
+                        System.exit(0);
                         break;
                     default:
-                        scanner.close();
-                        System.exit(0);
+                        String msg = "Error: Invalid input! '%s'";
+                        Utils.showTempMsg(String.format(msg, input));
                         break;
                 }
             }

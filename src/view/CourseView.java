@@ -80,11 +80,15 @@ public class CourseView {
                 case "B":
                     isInCourseView = false;
                     break;
-                case "":
+                case "q":
+                case "Q":
+                    scanner.close();
+                    Utils.showTempMsg("Goodbye!");
+                    System.exit(0);
                     break;
                 default:
-                    scanner.close();
-                    System.exit(0);
+                    String msg = "Error: Invalid input! (%s)";
+                    Utils.showTempMsg(String.format(msg, input));
                     break;
             }
         }

@@ -79,11 +79,15 @@ public class AssignmentView {
             case "B":
                 isInAssignmentView = false;
                 break;
-            case "":
+            case "q":
+            case "Q":
+                scanner.close();
+                Utils.showTempMsg("Goodbye!");
+                System.exit(0);
                 break;
             default:
-                scanner.close();
-                System.exit(0);
+                String msg = "Error: Invalid input! (%s)";
+                Utils.showTempMsg(String.format(msg, input));
                 break;
         }
     }
@@ -106,31 +110,29 @@ public class AssignmentView {
         System.out.print("< Enter assignment # to advance: ");
         String input = scanner.nextLine();
 
-        if (input.matches("[0-9]+")) {
+        try {
             int courseIndex = Integer.parseInt(input) - 1;
-            if (courseIndex >= 0 && courseIndex < assignmentList.size()) {
-                Assignment assignment = assignmentList.get(courseIndex);
+            Assignment assignment = assignmentList.get(courseIndex);
 
-                Status status = assignment.getStatus();
+            Status status = assignment.getStatus();
 
-                if (status.equals(Status.NOT_STARTED)) {
-                    status = Status.IN_PROGRESS;
-                } else if (status.equals(Status.IN_PROGRESS)) {
-                    status = Status.COMPLETE;
-                }
-
-                // if new status != original status
-                if (!status.equals(assignment.getStatus())) {
-                    assignment.setStatus(status);
-                    assignmentDAO.updateAssignment(assignment);
-                }
-
-            } else {
-                Utils.showTempMsg("Error: Selected index is out of bounds!");
+            if (status.equals(Status.NOT_STARTED)) {
+                status = Status.IN_PROGRESS;
+            } else if (status.equals(Status.IN_PROGRESS)) {
+                status = Status.COMPLETE;
             }
 
-        } else {
-            Utils.showTempMsg("Error: Must enter a number!");
+            // if new status != original status
+            if (!status.equals(assignment.getStatus())) {
+                assignment.setStatus(status);
+                assignmentDAO.updateAssignment(assignment);
+            }
+        } catch (NumberFormatException e) {
+            Utils.showTempMsg("Please enter a number");
+        } catch (IndexOutOfBoundsException e) {
+            Utils.showTempMsg("Please enter a number within range");
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
         }
     }
 
