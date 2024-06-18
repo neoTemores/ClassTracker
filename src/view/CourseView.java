@@ -83,7 +83,7 @@ public class CourseView {
                 case "q":
                 case "Q":
                     scanner.close();
-                    Utils.showTempMsg("Goodbye!");
+                    System.out.println("\n> Goodbye.");
                     System.exit(0);
                     break;
                 default:

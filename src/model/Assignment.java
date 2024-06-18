@@ -29,7 +29,7 @@ public class Assignment {
         this(0, 0, 0, "name - n/a", Status.NOT_STARTED, null);
     }
 
-    public Assignment(int id, int courseId, int week, String name, Assignment.Status status, String notes) {
+    public Assignment(int id, int courseId, int week, String name, Status status, String notes) {
         this.id = id;
         this.courseId = courseId;
         this.week = week;

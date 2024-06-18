@@ -119,6 +119,24 @@ public class AssignmentDAO {
         connection.close();
     }
 
+    public void updateAssignmentStatus(Assignment assignment) {
+        String query = "UPDATE assignment SET status = ? WHERE id = ?";
+        connection.open();
+        try {
+            PreparedStatement statement = connection.getConnection().prepareStatement(query);
+            statement.setString(1, assignment.getStatus().toString());
+            statement.setInt(2, assignment.getId());
+
+            statement.executeUpdate();
+
+        } catch (Exception e) {
+
+            Utils.showTempMsg(e.toString());
+        }
+
+        connection.close();
+    }
+
     public void deleteAssignment(int id) {
         String query = "DELETE FROM assignment WHERE id = ?";
 

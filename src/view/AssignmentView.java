@@ -82,7 +82,7 @@ public class AssignmentView {
             case "q":
             case "Q":
                 scanner.close();
-                Utils.showTempMsg("Goodbye!");
+                System.out.println("\n> Goodbye.");
                 System.exit(0);
                 break;
             default:
@@ -125,7 +125,7 @@ public class AssignmentView {
             // if new status != original status
             if (!status.equals(assignment.getStatus())) {
                 assignment.setStatus(status);
-                assignmentDAO.updateAssignment(assignment);
+                assignmentDAO.updateAssignmentStatus(assignment);
             }
         } catch (NumberFormatException e) {
             Utils.showTempMsg("Please enter a number");
