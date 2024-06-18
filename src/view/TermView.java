@@ -275,7 +275,8 @@ public class TermView {
     }
 
     private void printLine() {
-        String horizonalLine = "+-----+------+------------+------------+";
+        int[] colWidths = { 5, 6, 12, 12 };
+        String horizonalLine = Utils.generateHorizontalLine(colWidths);
 
         System.out.println(horizonalLine);
     }

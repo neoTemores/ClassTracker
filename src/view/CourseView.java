@@ -204,7 +204,6 @@ public class CourseView {
         String courseName = Utils.BLACK_BACKGROUND + Utils.WHITE + " ".repeat(12) + "Course Name" + " ".repeat(12)
                 + Utils.RESET;
         printLine();
-        // printRow("#", "Code", "Course Name");
         printRow(hash, code, courseName);
         printLine();
 
@@ -217,7 +216,8 @@ public class CourseView {
     }
 
     private void printLine() {
-        String horizonalLine = "+-----+------------+-------------------------------------+";
+        int[] colWidths = { 5, 12, 37 };
+        String horizonalLine = Utils.generateHorizontalLine(colWidths);
         System.out.println(horizonalLine);
     }
 

@@ -3,7 +3,6 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 import controller.AssignmentDAO;
 import model.Assignment;
 import model.Assignment.Status;
@@ -11,11 +10,11 @@ import model.Course;
 import utils.Utils;
 
 public class AssignmentView {
-    protected boolean isInAssignmentView;
-    protected boolean isFilteredByWeek;
-    protected int filteredWeekNum;
-    protected List<Assignment> assignmentList;
-    protected final Scanner scanner;
+    private boolean isInAssignmentView;
+    private boolean isFilteredByWeek;
+    private int filteredWeekNum;
+    private List<Assignment> assignmentList;
+    private final Scanner scanner;
     private final AssignmentDAO assignmentDAO;
     private final Course course;
     private final String courseTitle;
@@ -28,11 +27,7 @@ public class AssignmentView {
         scanner = new Scanner(System.in);
         assignmentDAO = new AssignmentDAO();
         this.course = course;
-        if (course != null) {
-            courseTitle = course.getCode() + " " + course.getName();
-        } else {
-            courseTitle = "";
-        }
+        courseTitle = course.getCode() + " " + course.getName();
     }
 
     public void open() {
@@ -52,15 +47,15 @@ public class AssignmentView {
         printAssignmentList();
 
         System.out.println();
-        Utils.printMenuItem("W", "Filter by week");
+        Utils.printMenuItem("F", "Filter by week");
         Utils.printMenuItem("A", "Advance status");
         Utils.printCRUDmenu();
         Utils.printMenuSelection();
 
         String input = scanner.nextLine().trim();
         switch (input) {
-            case "w":
-            case "W":
+            case "f":
+            case "F":
                 openFilterByWeekView();
                 break;
             case "a":
@@ -312,8 +307,8 @@ public class AssignmentView {
     }
 
     private void printLine() {
-        String horizonalLine = "+" + "-".repeat(5) + "+------+------------------+--------------+" + "-".repeat(33)
-                + "+";
+        int[] colWidths = { 5, 6, 18, 14, 33 };
+        String horizonalLine = Utils.generateHorizontalLine(colWidths);
         System.out.println(horizonalLine);
     }
 

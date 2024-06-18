@@ -24,7 +24,7 @@ public class JoinedAssignmentDAO extends AssignmentDAO {
         sb.append(
                 "SELECT c.code, c.name AS courseName, a.id AS assignmentId, a.courseId, a.week, a.name AS assignmentName, a.status, a.notes ");
         sb.append("FROM course c JOIN assignment a ");
-        sb.append("WHERE c.id = a.courseId AND c.termId = ?");
+        sb.append("WHERE c.id = a.courseId AND c.termId = ? ");
         if (weekNum > 0) {
             sb.append("AND a.week = ? ORDER BY c.code");
         } else {

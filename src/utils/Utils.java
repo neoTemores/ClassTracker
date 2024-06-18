@@ -131,6 +131,14 @@ public class Utils {
         return underline;
     }
 
+    public static String generateHorizontalLine(int[] colWidths) {
+        String horizontalLine = "+";
+        for (int i = 0; i < colWidths.length; i++) {
+            horizontalLine += "-".repeat(colWidths[i]) + "+";
+        }
+        return horizontalLine;
+    }
+
     public static void printCRUDmenu() {
         printMenuItem("C", "Create");
         printMenuItem("U", "Update");
