@@ -184,7 +184,7 @@ public class TermView {
         Utils.printMenuHeader("Term View", "Create New Term");
 
         try {
-            System.out.print("< Year: ");
+            System.out.print("\n< Year: ");
             int year = Integer.parseInt(scanner.nextLine());
             System.out.print("< Name: ");
             String name = scanner.nextLine();
@@ -216,7 +216,7 @@ public class TermView {
             Utils.clear();
             Utils.printMenuHeader("Term View", "Update Term");
 
-            System.out.println("> Updating " + term);
+            System.out.println("\n> Updating " + term);
 
             System.out.print("< Name: ");
             String name = scanner.nextLine().trim();

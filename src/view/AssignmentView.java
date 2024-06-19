@@ -137,10 +137,11 @@ public class AssignmentView {
 
     private void createAssignment() {
         Utils.clear();
-        Utils.printMenuHeader("Assignment View", Utils.getSubHeaderTitle("For course", courseTitle));
+        Utils.printMenuHeader("Assignment View",
+                Utils.getSubHeaderTitle("Create new Assignment", courseTitle));
 
         try {
-            System.out.print("< Week #: ");
+            System.out.print("\n< Week #: ");
             int week = Integer.parseInt(scanner.nextLine());
 
             System.out.print("< Name: ");
@@ -200,86 +201,80 @@ public class AssignmentView {
     private void updateAssignment() {
         System.out.print("> Enter assignment # to update: ");
         String input = scanner.nextLine();
-        if (input.matches("[0-9]+")) {
+        try {
             int courseIndex = Integer.parseInt(input) - 1;
-            if (courseIndex >= 0 && courseIndex < assignmentList.size()) {
-                Utils.clear();
-                Utils.printMenuHeader("Assignment View", Utils.getSubHeaderTitle("Update assignment in ", courseTitle));
+            Assignment assignment = assignmentList.get(courseIndex);
 
-                Assignment assignment = assignmentList.get(courseIndex);
-                System.out.println("> Updating " + assignment);
+            Utils.clear();
+            Utils.printMenuHeader("Assignment View", Utils.getSubHeaderTitle("Update assignment", courseTitle));
 
-                System.out.print("< Week: ");
-                String weekStr = scanner.nextLine().trim();
-                int week = 0;
-                if (weekStr.isBlank() || !weekStr.matches("[0-9]+")) {
-                    week = assignment.getWeek();
-                } else {
-                    week = Integer.parseInt(weekStr);
-                }
+            System.out.println("> Updating " + assignment);
 
-                System.out.print("< Name: ");
-                String name = scanner.nextLine().trim();
-                if (name.isBlank()) {
-                    name = assignment.getName();
-                }
-
-                printGetStatusInstructions();
-                String statusStr = scanner.nextLine().trim();
-                Status status;
-                if (statusStr.isBlank()) {
-                    status = assignment.getStatus();
-                } else {
-                    status = parseStatus(statusStr);
-                }
-
-                System.out.print("< Notes: ");
-                String notes = scanner.nextLine().trim();
-                if (notes.isBlank()) {
-                    notes = assignment.getNotes();
-                }
-
-                assignment.setWeek(week);
-                assignment.setName(name);
-                assignment.setStatus(status);
-                assignment.setNotes(notes);
-                System.out.println("> Update to " + assignment);
-
-                System.out.print("< Proceed with update? (y/n): ");
-                String confirm = scanner.nextLine();
-                if (Utils.confirm(confirm)) {
-                    assignmentDAO.updateAssignment(assignment);
-                }
+            System.out.print("< Week: ");
+            String weekStr = scanner.nextLine().trim();
+            int week = 0;
+            if (weekStr.isBlank() || !weekStr.matches("[0-9]+")) {
+                week = assignment.getWeek();
             } else {
-                Utils.showTempMsg("Error: Selected index is out of bounds!");
+                week = Integer.parseInt(weekStr);
             }
-        }
 
+            System.out.print("< Name: ");
+            String name = scanner.nextLine().trim();
+            if (name.isBlank()) {
+                name = assignment.getName();
+            }
+
+            printGetStatusInstructions();
+            String statusStr = scanner.nextLine().trim();
+            Status status;
+            if (statusStr.isBlank()) {
+                status = assignment.getStatus();
+            } else {
+                status = parseStatus(statusStr);
+            }
+
+            System.out.print("< Notes: ");
+            String notes = scanner.nextLine().trim();
+            if (notes.isBlank()) {
+                notes = assignment.getNotes();
+            }
+
+            assignment.setWeek(week);
+            assignment.setName(name);
+            assignment.setStatus(status);
+            assignment.setNotes(notes);
+            System.out.println("> Update to " + assignment);
+
+            System.out.print("< Proceed with update? (y/n): ");
+            String confirm = scanner.nextLine();
+            if (Utils.confirm(confirm)) {
+                assignmentDAO.updateAssignment(assignment);
+            }
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
+        }
     }
 
     private void deleteAssignment() {
         System.out.print("< Enter assignment # to delete: ");
         String input = scanner.nextLine();
-
-        if (input.matches("[0-9]+")) {
+        try {
             int assignmentIndex = Integer.parseInt(input) - 1;
-            if (assignmentIndex >= 0 && assignmentIndex < assignmentList.size()) {
+            Assignment assignment = assignmentList.get(assignmentIndex);
 
-                Utils.clear();
-                Utils.printMenuHeader("Assignment View", Utils.getSubHeaderTitle("Delete assignment", courseTitle));
+            Utils.clear();
+            Utils.printMenuHeader("Assignment View", Utils.getSubHeaderTitle("Delete assignment", courseTitle));
 
-                Assignment assignment = assignmentList.get(assignmentIndex);
-                System.out.println("\n> Seleted " + assignment);
-                System.out.print("< Delete? (y/n): ");
-                String confirm = scanner.nextLine();
+            System.out.println("\n> Seleted " + assignment);
+            System.out.print("< Delete? (y/n): ");
+            String confirm = scanner.nextLine();
 
-                if (Utils.confirm(confirm)) {
-                    assignmentDAO.deleteAssignment(assignment.getId());
-                }
-
-            } else {
-                Utils.showTempMsg("Error: Selected index is out of bounds!");
+            if (Utils.confirm(confirm)) {
+                assignmentDAO.deleteAssignment(assignment.getId());
             }
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
         }
     }
 

@@ -111,10 +111,10 @@ public class CourseView {
 
     private void createCourse() {
         Utils.clear();
-        Utils.printMenuHeader("Course View", Utils.getSubHeaderTitle("For Term", termTitle));
+        Utils.printMenuHeader("Course View", Utils.getSubHeaderTitle("Create new Course in Term", termTitle));
 
         try {
-            System.out.print("< Code: ");
+            System.out.print("\n< Code: ");
             String code = scanner.nextLine();
 
             System.out.print("< Name: ");
@@ -137,64 +137,60 @@ public class CourseView {
     private void updateCourse() {
         System.out.print("> Enter course # to update: ");
         String input = scanner.nextLine();
-        if (input.matches("[0-9]+")) {
+        try {
             int courseIndex = Integer.parseInt(input) - 1;
-            if (courseIndex >= 0 && courseIndex < courseList.size()) {
-                Utils.clear();
-                Utils.printMenuHeader("Course View", Utils.getSubHeaderTitle("Update course in ", termTitle));
+            Course course = courseList.get(courseIndex);
 
-                Course course = courseList.get(courseIndex);
-                System.out.println("> Updating " + course);
+            Utils.clear();
+            Utils.printMenuHeader("Course View", Utils.getSubHeaderTitle("Update Course in Term", termTitle));
 
-                System.out.print("< Code: ");
-                String code = scanner.nextLine();
-                if (code.isBlank()) {
-                    code = course.getCode();
-                }
+            System.out.println("\n> Updating " + course);
 
-                System.out.print("< Name: ");
-                String name = scanner.nextLine();
-                if (name.isBlank()) {
-                    name = course.getName();
-                }
-
-                course.setCode(code);
-                course.setName(name);
-                System.out.println("> Update to " + course);
-
-                System.out.print("< Proceed with update? (y/n): ");
-                String confrim = scanner.nextLine();
-                if (Utils.confirm(confrim)) {
-                    courseDAO.updateCourse(course);
-                }
-            } else {
-                Utils.showTempMsg("Error: Selected index is out of bounds!");
+            System.out.print("< Code: ");
+            String code = scanner.nextLine();
+            if (code.isBlank()) {
+                code = course.getCode();
             }
+
+            System.out.print("< Name: ");
+            String name = scanner.nextLine();
+            if (name.isBlank()) {
+                name = course.getName();
+            }
+
+            course.setCode(code);
+            course.setName(name);
+            System.out.println("> Update to " + course);
+
+            System.out.print("< Proceed with update? (y/n): ");
+            String confrim = scanner.nextLine();
+            if (Utils.confirm(confrim)) {
+                courseDAO.updateCourse(course);
+            }
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
         }
     }
 
     private void deleteCourse() {
         System.out.print("< Enter course # to delete: ");
         String input = scanner.nextLine();
-
-        if (input.matches("[0-9]+")) {
+        try {
             int courseIndex = Integer.parseInt(input) - 1;
-            if (courseIndex >= 0 && courseIndex < courseList.size()) {
+            Course course = courseList.get(courseIndex);
 
-                Utils.clear();
-                Utils.printMenuHeader("Course View", Utils.getSubHeaderTitle("For Term", termTitle));
+            Utils.clear();
+            Utils.printMenuHeader("Course View", Utils.getSubHeaderTitle("Delete Course in Term", termTitle));
 
-                Course course = courseList.get(courseIndex);
-                System.out.println("\n> Seleted " + course);
-                System.out.print("< Delete? (y/n): ");
-                String confirm = scanner.nextLine();
+            System.out.println("\n> Seleted " + course);
+            System.out.print("< Delete? (y/n): ");
+            String confirm = scanner.nextLine();
 
-                if (Utils.confirm(confirm)) {
-                    courseDAO.deleteCourse(course.getId());
-                }
-            } else {
-                Utils.showTempMsg("Error: Selected index is out of bounds!");
+            if (Utils.confirm(confirm)) {
+                courseDAO.deleteCourse(course.getId());
             }
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
         }
     }
 
