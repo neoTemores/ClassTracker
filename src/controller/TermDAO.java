@@ -26,6 +26,23 @@ public class TermDAO {
         }
     }
 
+    public void toggleIsActive(int termId, boolean isActive) {
+        String query = "UPDATE term SET isActive = ? WHERE id = ?";
+
+        connection.open();
+        try {
+            PreparedStatement statement = connection.getConnection().prepareStatement(query);
+            statement.setBoolean(1, isActive);
+            statement.setInt(2, termId);
+
+            statement.executeUpdate();
+
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
+        }
+        connection.close();
+    }
+
     public void createTerm(Term term) {
         String query = "INSERT INTO term (name, year, isActive) VALUES(?, ?, ?)";
 

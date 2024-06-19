@@ -165,7 +165,18 @@ public class TermView {
     }
 
     private void toggleIsActiveStatus() {
-        System.out.print();
+        System.out.print("< Enter term # to toggle status: ");
+        String input = scanner.nextLine();
+        try {
+            int index = Integer.parseInt(input) - 1;
+            Term t = termList.get(index);
+            boolean isActive = !t.isActive();
+
+            termDAO.toggleIsActive(t.getId(), isActive);
+
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
+        }
     }
 
     private void createTerm() {
