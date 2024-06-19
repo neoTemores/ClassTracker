@@ -121,7 +121,7 @@ public class AssignmentView {
             // if new status != original status
             if (!status.equals(assignment.getStatus())) {
                 assignment.setStatus(status);
-                assignmentDAO.updateAssignmentStatus(assignment);
+                assignmentDAO.updateAssignmentStatus(assignment); // todo create method to handle only update status
             }
         } catch (NumberFormatException e) {
             Utils.showTempMsg("Please enter a number");

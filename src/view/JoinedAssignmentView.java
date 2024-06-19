@@ -82,8 +82,8 @@ public class JoinedAssignmentView {
         }
     }
 
-    // Extract this by implementing interface IAssignment on POJOs and extending
-    // AssignmentView
+    // todo Extract this by implementing interface IAssignment on POJOs and
+    // extending AssignmentView
     protected void openFilterByWeekView() {
         System.out.print("< Enter week # to filter by (0 = all): ");
         String input = scanner.nextLine();
@@ -95,7 +95,7 @@ public class JoinedAssignmentView {
         }
     }
 
-    // todo
+    // todo compelte. need dao method to update status
     private void advanceStatus() {
 
     }
