@@ -285,14 +285,6 @@ public class AssignmentView {
 
     // Refactor using Utils.colorizeTableHeader()
     private void printAssignmentList() {
-        // String color = Utils.BLACK_BACKGROUND + Utils.WHITE;
-        // String hash = color + " # " + Utils.RESET;
-        // String week = color + "Week" + Utils.RESET;
-        // String name = color + " ".repeat(6) + "Name" + " ".repeat(6) + Utils.RESET;
-        // String status = color + " ".repeat(3) + "Status" + " ".repeat(3) +
-        // Utils.RESET;
-        // String notes = color + " ".repeat(13) + "Notes" + " ".repeat(13) +
-        // Utils.RESET;
 
         String hash = Utils.colorizeTableHeader("#", 1);
         String week = Utils.colorizeTableHeader("Week", 0);
