@@ -84,7 +84,7 @@ public class TermView {
             }
             System.out.println();
             Utils.printMenuItem("#", option1);
-            Utils.printCRUDmenu();
+            Utils.printCRUDmenu("term");
             Utils.printMenuSelection();
 
             String input = scanner.nextLine().trim();
@@ -134,11 +134,11 @@ public class TermView {
 
     // Refactor using Utils.colorizeTableHeader()
     private void printTermList() {
-        String hash = Utils.BLACK_BACKGROUND + Utils.WHITE + " # " + Utils.RESET;
-        String year = Utils.BLACK_BACKGROUND + Utils.WHITE + "Year" + Utils.RESET;
-        String term = Utils.BLACK_BACKGROUND + Utils.WHITE + "   Term   " + Utils.RESET;
-        String isActive = Utils.BLACK_BACKGROUND + Utils.WHITE + " isActive " + Utils.RESET;
 
+        String hash = Utils.colorizeTableHeader("#", 1);
+        String year = Utils.colorizeTableHeader("Year", 0);
+        String term = Utils.colorizeTableHeader("Term", 3);
+        String isActive = Utils.colorizeTableHeader("isActive", 1);
         printLine();
         printRow(hash, year, term, isActive);
         printLine();

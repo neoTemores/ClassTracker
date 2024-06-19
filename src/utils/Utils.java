@@ -142,10 +142,10 @@ public class Utils {
         return horizontalLine;
     }
 
-    public static void printCRUDmenu() {
-        printMenuItem("C", "Create");
-        printMenuItem("U", "Update");
-        printMenuItem("D", "Delete");
+    public static void printCRUDmenu(String item) {
+        printMenuItem("C", "Create " + item);
+        printMenuItem("U", "Update " + item);
+        printMenuItem("D", "Delete " + item);
         printMenuItem("B", "Back");
         printMenuItem("Q", "Quit");
     }

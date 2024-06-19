@@ -51,7 +51,7 @@ public class CourseView {
         System.out.println();
         Utils.printMenuItem("#", option1);
         Utils.printMenuItem("A", "All assignments");
-        Utils.printCRUDmenu();
+        Utils.printCRUDmenu("course");
         Utils.printMenuSelection();
 
         String input = scanner.nextLine().trim();
@@ -200,10 +200,11 @@ public class CourseView {
 
     // Refactor using Utils.colorizeTableHeader()
     private void printCourseList() {
-        String hash = Utils.BLACK_BACKGROUND + Utils.WHITE + " # " + Utils.RESET;
-        String code = Utils.BLACK_BACKGROUND + Utils.WHITE + " ".repeat(3) + "Code" + " ".repeat(3) + Utils.RESET;
-        String courseName = Utils.BLACK_BACKGROUND + Utils.WHITE + " ".repeat(12) + "Course Name" + " ".repeat(12)
-                + Utils.RESET;
+
+        String hash = Utils.colorizeTableHeader("#", 1);
+        String code = Utils.colorizeTableHeader("Code", 3);
+        String courseName = Utils.colorizeTableHeader("Course Name", 12);
+
         printLine();
         printRow(hash, code, courseName);
         printLine();
