@@ -94,14 +94,11 @@ public class AssignmentView {
     protected void openFilterByWeekView() {
         System.out.print("< Enter week # to filter by (0 = all): ");
         String input = scanner.nextLine();
-
-        if (input.matches("[0-9]+")) {
+        try {
             this.filteredWeekNum = Integer.parseInt(input);
-
             this.isFilteredByWeek = this.filteredWeekNum != 0;
-
-        } else {
-            Utils.showTempMsg("Error: Week must be a number!");
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
         }
     }
 
