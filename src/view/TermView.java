@@ -209,53 +209,52 @@ public class TermView {
         System.out.print("> Enter term # to update: ");
         String input = scanner.nextLine();
 
-        if (input.matches("[0-9]+")) {
+        try {
             int termIndex = Integer.parseInt(input) - 1;
-            if (termIndex >= 0 && termIndex < termList.size()) {
-                Utils.clear();
-                Utils.printMenuHeader("Term View", "Update Term");
+            Term term = termList.get(termIndex);
 
-                Term term = termList.get(termIndex);
-                System.out.println("> Updating " + term);
+            Utils.clear();
+            Utils.printMenuHeader("Term View", "Update Term");
 
-                System.out.print("< Name: ");
-                String name = scanner.nextLine().trim();
-                if (name.isBlank()) {
-                    name = term.getName();
-                }
+            System.out.println("> Updating " + term);
 
-                System.out.print("< Year: ");
-                String yearStr = scanner.nextLine().trim();
-                int year = 0;
-                if (yearStr.isBlank() || !yearStr.matches("[0-9]+")) {
-                    year = term.getYear();
-                } else {
-                    year = Integer.parseInt(yearStr);
-                }
-
-                System.out.print("< isActive (t/f): ");
-                String isActiveStr = scanner.nextLine().trim();
-                boolean isActive = term.isActive();
-                if (isActiveStr.equalsIgnoreCase("t") || isActiveStr.equalsIgnoreCase("true")) {
-                    isActive = true;
-                } else if (isActiveStr.equalsIgnoreCase("f") || isActiveStr.equalsIgnoreCase("false")) {
-                    isActive = false;
-                }
-
-                term.setName(name);
-                term.setYear(year);
-                term.setActive(isActive);
-                System.out.println("> Update to " + term);
-
-                System.out.print("< Proceed with update? (y/n): ");
-                String confirm = scanner.nextLine();
-                if (Utils.confirm(confirm)) {
-                    termDAO.updateTerm(term);
-                }
-            } else {
-                Utils.showTempMsg("Error: Selected index is out of bounds!");
+            System.out.print("< Name: ");
+            String name = scanner.nextLine().trim();
+            if (name.isBlank()) {
+                name = term.getName();
             }
 
+            System.out.print("< Year: ");
+            String yearStr = scanner.nextLine().trim();
+            int year = 0;
+            if (yearStr.isBlank() || !yearStr.matches("[0-9]+")) {
+                year = term.getYear();
+            } else {
+                year = Integer.parseInt(yearStr);
+            }
+
+            System.out.print("< isActive (t/f): ");
+            String isActiveStr = scanner.nextLine().trim();
+            boolean isActive = term.isActive();
+            if (isActiveStr.equalsIgnoreCase("t") || isActiveStr.equalsIgnoreCase("true")) {
+                isActive = true;
+            } else if (isActiveStr.equalsIgnoreCase("f") || isActiveStr.equalsIgnoreCase("false")) {
+                isActive = false;
+            }
+
+            term.setName(name);
+            term.setYear(year);
+            term.setActive(isActive);
+            System.out.println("> Update to " + term);
+
+            System.out.print("< Proceed with update? (y/n): ");
+            String confirm = scanner.nextLine();
+            if (Utils.confirm(confirm)) {
+                termDAO.updateTerm(term);
+            }
+
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
         }
     }
 
@@ -263,25 +262,22 @@ public class TermView {
 
         System.out.print("< Enter term # to delete: ");
         String input = scanner.nextLine();
-
-        if (input.matches("[0-9]+")) {
+        try {
             int termIndex = Integer.parseInt(input) - 1;
-            if (termIndex >= 0 && termIndex < termList.size()) {
+            Term term = termList.get(termIndex);
 
-                Utils.clear();
-                Utils.printMenuHeader("Term View", "Delete Term");
+            Utils.clear();
+            Utils.printMenuHeader("Term View", "Delete Term");
 
-                Term term = termList.get(termIndex);
-                System.out.println("\n> Seleted " + term);
-                System.out.print("> Delete? (y/n): ");
-                String confirm = scanner.nextLine();
+            System.out.println("\n> Seleted " + term);
+            System.out.print("> Delete? (y/n): ");
+            String confirm = scanner.nextLine();
 
-                if (Utils.confirm(confirm)) {
-                    termDAO.deleteTerm(term.getId());
-                }
-            } else {
-                Utils.showTempMsg("Error: Selected index is out of bounds!");
+            if (Utils.confirm(confirm)) {
+                termDAO.deleteTerm(term.getId());
             }
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
         }
     }
 
