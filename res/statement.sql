@@ -36,6 +36,6 @@
 
 	SELECT c.code, c.name AS courseName, a.id, a.week, a.name AS assignmentName, a.status, a.notes 
 	FROM course c JOIN assignment a
-	WHERE c.id = a.courseId AND c.termId = 23
-	AND a.week = 7
+	WHERE c.id = a.courseId AND c.termId = ?
+	AND a.week = ?
 	ORDER BY c.code, a.week;
