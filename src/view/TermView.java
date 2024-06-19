@@ -84,6 +84,7 @@ public class TermView {
             }
             System.out.println();
             Utils.printMenuItem("#", option1);
+            Utils.printMenuItem("T", "Toggle isActive status");
             Utils.printCRUDmenu("term");
             Utils.printMenuSelection();
 
@@ -100,6 +101,10 @@ public class TermView {
                 }
             } else {
                 switch (input) {
+                    case "t":
+                    case "T":
+                        toggleIsActiveStatus();
+                        break;
                     case "c":
                     case "C":
                         createTerm();
@@ -157,6 +162,10 @@ public class TermView {
     private void openCourseView(Term term) {
         CourseView courseView = new CourseView(term);
         courseView.open();
+    }
+
+    private void toggleIsActiveStatus() {
+        System.out.print();
     }
 
     private void createTerm() {
