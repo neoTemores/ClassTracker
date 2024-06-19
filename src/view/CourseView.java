@@ -198,7 +198,6 @@ public class CourseView {
         }
     }
 
-    // Refactor using Utils.colorizeTableHeader()
     private void printCourseList() {
 
         String hash = Utils.colorizeTableHeader("#", 1);
@@ -208,7 +207,9 @@ public class CourseView {
         printLine();
         printRow(hash, code, courseName);
         printLine();
-
+        if (courseList.size() == 0) {
+            System.out.println("** No courses found **");
+        }
         int lineNum = 1;
         for (Course c : courseList) {
             printRow(lineNum, c.getCode(), c.getName());

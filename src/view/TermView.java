@@ -132,7 +132,6 @@ public class TermView {
 
     }
 
-    // Refactor using Utils.colorizeTableHeader()
     private void printTermList() {
 
         String hash = Utils.colorizeTableHeader("#", 1);
@@ -142,6 +141,10 @@ public class TermView {
         printLine();
         printRow(hash, year, term, isActive);
         printLine();
+
+        if (termList.size() == 0) {
+            System.out.println("** No terms found **");
+        }
 
         int lineNum = 1;
         for (Term t : termList) {
