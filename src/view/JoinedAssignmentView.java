@@ -109,10 +109,21 @@ public class JoinedAssignmentView extends AssignmentView {
         }
 
         int lineNum = 1;
+        String currentCourse = "";
+        // = joinedAssignmentList.size() > 0 ?
+        // joinedAssignmentList.get(0).getCourseCode() : ""
+        if (joinedAssignmentList.size() > 0) {
+            currentCourse = joinedAssignmentList.get(0).getCourseCode();
+        }
         for (JoinedAssignment a : joinedAssignmentList) {
+            if (!currentCourse.equals(a.getCourseCode())) {
+                printLine();
+                currentCourse = a.getCourseCode();
+            }
             printRow(lineNum, a.getCourseCode(), a.getCourseName(), a.getWeek(), a.getName(), a.getStatus(),
                     a.getNotes());
             printLine();
+
             lineNum++;
         }
     }

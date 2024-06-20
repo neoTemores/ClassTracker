@@ -199,7 +199,7 @@ public class AssignmentView {
     }
 
     private void updateAssignment() {
-        System.out.print("> Enter assignment # to update: ");
+        System.out.print("\n> Enter assignment # to update: ");
         String input = scanner.nextLine();
         try {
             int courseIndex = Integer.parseInt(input) - 1;
@@ -244,7 +244,7 @@ public class AssignmentView {
             assignment.setName(name);
             assignment.setStatus(status);
             assignment.setNotes(notes);
-            System.out.println("> Update to " + assignment);
+            System.out.println("\n> Update to " + assignment);
 
             System.out.print("< Proceed with update? (y/n): ");
             String confirm = scanner.nextLine();
