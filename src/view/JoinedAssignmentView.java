@@ -2,37 +2,28 @@ package view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 import controller.JoinedAssignmentDAO;
+import model.Assignment;
 import model.Assignment.Status;
 import model.JoinedAssignment;
 import model.Term;
 import utils.Utils;
 
-public class JoinedAssignmentView {
-    private boolean isInJoinedAssignmentView;
-    private boolean isFilteredByWeek;
-    private int filteredWeekNum;
-    private final Scanner scanner;
+public class JoinedAssignmentView extends AssignmentView {
     private final JoinedAssignmentDAO joinedAssignmentDAO;
     private final Term term;
     private final String termTitle;
     private List<JoinedAssignment> joinedAssignmentList;
 
     public JoinedAssignmentView(Term term) {
-        isInJoinedAssignmentView = true;
-        isFilteredByWeek = false;
-        filteredWeekNum = 0;
         this.term = term;
         termTitle = term.getName() + " " + term.getYear();
-        scanner = new Scanner(System.in);
         joinedAssignmentDAO = new JoinedAssignmentDAO();
         joinedAssignmentList = new ArrayList<>();
     }
 
     public void open() {
-        while (isInJoinedAssignmentView) {
+        while (isInAssignmentView) {
             mainMenu();
         }
     }
@@ -67,7 +58,7 @@ public class JoinedAssignmentView {
                 break;
             case "b":
             case "B":
-                isInJoinedAssignmentView = false;
+                isInAssignmentView = false;
                 break;
             case "q":
             case "Q":
@@ -82,22 +73,22 @@ public class JoinedAssignmentView {
         }
     }
 
-    // todo Extract this by implementing interface IAssignment on POJOs and
-    // extending AssignmentView
-    protected void openFilterByWeekView() {
-        System.out.print("< Enter week # to filter by (0 = all): ");
+    private void advanceStatus() {
+        System.out.print("< Enter assignment # to advance: ");
         String input = scanner.nextLine();
+
         try {
-            this.filteredWeekNum = Integer.parseInt(input);
-            this.isFilteredByWeek = this.filteredWeekNum != 0;
+            int index = Integer.parseInt(input) - 1;
+            JoinedAssignment assignment = joinedAssignmentList.get(index);
+
+            Status newStatus = getNewStatus(assignment.getStatus());
+
+            if (!newStatus.equals(assignment.getStatus())) {
+                joinedAssignmentDAO.updateAssignmentStatus(newStatus, assignment.getId());
+            }
         } catch (Exception e) {
             Utils.showTempMsg(e.toString());
         }
-    }
-
-    // todo compelte. need dao method to update status
-    private void advanceStatus() {
-
     }
 
     private void printJoinedAssignmentList() {

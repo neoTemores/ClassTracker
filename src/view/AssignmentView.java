@@ -10,24 +10,28 @@ import model.Course;
 import utils.Utils;
 
 public class AssignmentView {
-    private boolean isInAssignmentView;
-    private boolean isFilteredByWeek;
-    private int filteredWeekNum;
+    protected boolean isInAssignmentView;
+    protected boolean isFilteredByWeek;
+    protected int filteredWeekNum;
+    protected final Scanner scanner;
     private List<Assignment> assignmentList;
-    private final Scanner scanner;
     private final AssignmentDAO assignmentDAO;
     private final Course course;
     private final String courseTitle;
+
+    public AssignmentView() {
+        this(new Course());
+    }
 
     public AssignmentView(Course course) {
         isInAssignmentView = true;
         isFilteredByWeek = false;
         filteredWeekNum = 0;
-        assignmentList = new ArrayList<>();
         scanner = new Scanner(System.in);
-        assignmentDAO = new AssignmentDAO();
         this.course = course;
         courseTitle = course.getCode() + " " + course.getName();
+        assignmentList = new ArrayList<>();
+        assignmentDAO = new AssignmentDAO();
     }
 
     public void open() {
@@ -102,31 +106,29 @@ public class AssignmentView {
         }
     }
 
+    protected Status getNewStatus(Status status) {
+        if (status.equals(Status.NOT_STARTED)) {
+            status = Status.IN_PROGRESS;
+        } else if (status.equals(Status.IN_PROGRESS)) {
+            status = Status.COMPLETE;
+        }
+
+        return status;
+    }
+
     private void advanceStatus() {
         System.out.print("< Enter assignment # to advance: ");
         String input = scanner.nextLine();
 
         try {
-            int courseIndex = Integer.parseInt(input) - 1;
-            Assignment assignment = assignmentList.get(courseIndex);
+            int index = Integer.parseInt(input) - 1;
+            Assignment assignment = assignmentList.get(index);
 
-            Status status = assignment.getStatus();
+            Status newStatus = getNewStatus(assignment.getStatus());
 
-            if (status.equals(Status.NOT_STARTED)) {
-                status = Status.IN_PROGRESS;
-            } else if (status.equals(Status.IN_PROGRESS)) {
-                status = Status.COMPLETE;
+            if (!newStatus.equals(assignment.getStatus())) {
+                assignmentDAO.updateAssignmentStatus(newStatus, assignment.getId());
             }
-
-            // if new status != original status
-            if (!status.equals(assignment.getStatus())) {
-                assignment.setStatus(status);
-                assignmentDAO.updateAssignmentStatus(assignment); // todo create method to handle only update status
-            }
-        } catch (NumberFormatException e) {
-            Utils.showTempMsg("Please enter a number");
-        } catch (IndexOutOfBoundsException e) {
-            Utils.showTempMsg("Please enter a number within range");
         } catch (Exception e) {
             Utils.showTempMsg(e.toString());
         }
@@ -180,6 +182,7 @@ public class AssignmentView {
 
     private Status parseStatus(String input) {
         Status status;
+
         switch (input) {
             case "2":
                 status = Status.IN_PROGRESS;

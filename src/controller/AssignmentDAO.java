@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import model.Assignment;
+import model.Assignment.Status;
 import utils.DBconnection;
 import utils.Utils;
 
@@ -119,13 +120,13 @@ public class AssignmentDAO {
         connection.close();
     }
 
-    public void updateAssignmentStatus(Assignment assignment) {
+    public void updateAssignmentStatus(Status status, int assignmentId) {
         String query = "UPDATE assignment SET status = ? WHERE id = ?";
         connection.open();
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);
-            statement.setString(1, assignment.getStatus().toString());
-            statement.setInt(2, assignment.getId());
+            statement.setString(1, status.toString());
+            statement.setInt(2, assignmentId);
 
             statement.executeUpdate();
 
