@@ -90,7 +90,7 @@ public class TermDAO {
         if (isFilterByActive) {
             query += " WHERE isActive = true";
         }
-        // query += " ORDER BY id DESC";
+
         connection.open();
         try {
             PreparedStatement statement = connection.getConnection().prepareStatement(query);

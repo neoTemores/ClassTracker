@@ -65,15 +65,19 @@ public class AssignmentDAO {
 
     public List<Assignment> getAssignmentList(int courseId, int weekNum) {
         List<Assignment> assignmentList = new ArrayList<>();
-        String query = "SELECT * FROM assignment";
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT * FROM assignment ");
 
         if (courseId > 0 && weekNum > 0) {
-            query += " WHERE courseId = ? AND week = ?";
+            sb.append("WHERE courseId = ? AND week = ? ");
         } else if (courseId > 0) {
-            query += " WHERE courseID = ?";
+            sb.append("WHERE courseID = ? ");
         }
 
-        query += " ORDER BY week";
+        sb.append("ORDER BY week");
+
+        String query = sb.toString();
 
         connection.open();
         try {

@@ -3,7 +3,6 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 import controller.JoinedAssignmentDAO;
-import model.Assignment;
 import model.Assignment.Status;
 import model.JoinedAssignment;
 import model.Term;
