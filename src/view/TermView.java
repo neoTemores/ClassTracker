@@ -82,9 +82,14 @@ public class TermView {
             } else if (termList.size() == 1) {
                 option1 = "Enter term #";
             }
+
             System.out.println();
             Utils.printMenuItem("#", option1);
-            Utils.printMenuItem("T", "Toggle isActive status");
+
+            if (!termList.isEmpty()) {
+                Utils.printMenuItem("T", "Toggle isActive status");
+            }
+
             Utils.printCRUDmenu("term");
             Utils.printMenuSelection();
 
@@ -103,7 +108,9 @@ public class TermView {
                 switch (input) {
                     case "t":
                     case "T":
-                        toggleIsActiveStatus();
+                        if (!termList.isEmpty()) {
+                            toggleIsActiveStatus();
+                        }
                         break;
                     case "c":
                     case "C":
