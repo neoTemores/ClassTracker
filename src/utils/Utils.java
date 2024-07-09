@@ -49,13 +49,13 @@ public class Utils {
 
         switch (status) {
             case "Not Started":
-                colorizedStatus = Utils.RED + status + Utils.RESET + " ";
+                colorizedStatus = Utils.RED + BLACK_BACKGROUND + status + Utils.RESET + " ";
                 break;
             case "In Progress":
-                colorizedStatus = Utils.YELLOW + status + Utils.RESET + " ";
+                colorizedStatus = Utils.YELLOW + BLACK_BACKGROUND + status + Utils.RESET + " ";
                 break;
             case "Complete":
-                colorizedStatus = Utils.GREEN + status + Utils.RESET + " ".repeat(4);
+                colorizedStatus = Utils.GREEN + BLACK_BACKGROUND + status + Utils.RESET + " ".repeat(4);
                 break;
             default:
                 colorizedStatus = status;
