@@ -95,7 +95,7 @@ public class JoinedAssignmentView extends AssignmentView {
         String code = Utils.colorizeTableHeader("Code", 3);
         String courseName = Utils.colorizeTableHeader("Course Name", 12);
         String week = Utils.colorizeTableHeader("Week", 0);
-        String assignment = Utils.colorizeTableHeader("Assignment", 3);
+        String assignment = Utils.colorizeTableHeader("Assignment", 5);
         String status = Utils.colorizeTableHeader("Status", 3);
         String notes = Utils.colorizeTableHeader("Notes", 13);
 
@@ -128,7 +128,7 @@ public class JoinedAssignmentView extends AssignmentView {
     }
 
     private void printLine() {
-        int[] colWidths = { 5, 12, 37, 6, 18, 14, 33 };
+        int[] colWidths = { 5, 12, 37, 6, 22, 14, 33 };
         String horizontalLine = Utils.generateHorizontalLine(colWidths);
         System.out.println(horizontalLine);
     }
@@ -136,7 +136,7 @@ public class JoinedAssignmentView extends AssignmentView {
     private void printRow(String lineNum, String code, String courseName, String week, String assignmentName,
             String status,
             String notes) {
-        String columnFormat = "| %3s | %10s | %35s | %4s | %16s | %12s | %31s |";
+        String columnFormat = "| %3s | %10s | %35s | %4s | %20s | %12s | %31s |";
 
         status = Utils.colorizeStatus(status);
         String row = String.format(columnFormat, lineNum, code, courseName, week, assignmentName, status, notes);
@@ -146,8 +146,8 @@ public class JoinedAssignmentView extends AssignmentView {
     private void printRow(int lineNum, String code, String courseName, int week, String assignment, Status status,
             String notes) {
 
-        if (assignment.length() > 16) {
-            assignment = assignment.substring(0, 14) + "..";
+        if (assignment.length() > 20) {
+            assignment = assignment.substring(0, 18) + "..";
         }
         if (notes.length() > 30) {
             notes = notes.substring(0, 28) + "..";

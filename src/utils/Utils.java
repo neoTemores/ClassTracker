@@ -30,6 +30,8 @@ public class Utils {
     public static final String CYAN_BACKGROUND = "\u001B[46m";
     public static final String WHITE_BACKGROUND = "\u001B[47m";
 
+    public static final String HEADER_COLOR = Utils.CYAN;
+
     public static void clear() {
         System.out.println(CLEAR_SCREEN);
     }
@@ -39,9 +41,9 @@ public class Utils {
     }
 
     public static String colorizeTableHeader(String header, int padding) {
-        String color = BLACK_BACKGROUND + WHITE;
+
         String headerFmt = "%s%s%s%s%s";
-        return String.format(headerFmt, color, " ".repeat(padding), header, " ".repeat(padding), RESET);
+        return String.format(headerFmt, Utils.HEADER_COLOR, " ".repeat(padding), header, " ".repeat(padding), RESET);
     }
 
     public static String colorizeStatus(String status) {
@@ -80,7 +82,7 @@ public class Utils {
         } else if (length == 2) {
             colorizedLineNume = " " + colorizedLineNume;
         }
-        colorizedLineNume = BLACK_BACKGROUND + WHITE + colorizedLineNume + RESET;
+        colorizedLineNume = Utils.HEADER_COLOR + colorizedLineNume + RESET;
 
         return colorizedLineNume;
     }
@@ -95,9 +97,9 @@ public class Utils {
     }
 
     public static void printMenuHeader(String header, String subheader) {
-        String appTitle = CYAN + "Neo's Assignment Tracker App" + RESET;
-        String outline = "-".repeat(appTitle.length() - 9);
-        // System.out.println(outline);
+        String appTitle = "| " + Utils.HEADER_COLOR + "Neo's Assignment Tracker App" + RESET + " |";
+        String outline = "+" + "-".repeat(appTitle.length() - 11) + "+";
+        System.out.println(outline);
         System.out.println(appTitle);
         System.out.println(outline + "\n");
 

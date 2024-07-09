@@ -282,7 +282,7 @@ public class AssignmentView {
 
         String hash = Utils.colorizeTableHeader("#", 1);
         String week = Utils.colorizeTableHeader("Week", 0);
-        String name = Utils.colorizeTableHeader("Name", 6);
+        String name = Utils.colorizeTableHeader("Name", 8);
         String status = Utils.colorizeTableHeader("Status", 3);
         String notes = Utils.colorizeTableHeader("Notes", 13);
 
@@ -303,13 +303,13 @@ public class AssignmentView {
     }
 
     private void printLine() {
-        int[] colWidths = { 5, 6, 18, 14, 33 };
+        int[] colWidths = { 5, 6, 22, 14, 33 };
         String horizonalLine = Utils.generateHorizontalLine(colWidths);
         System.out.println(horizonalLine);
     }
 
     private void printRow(String lineNum, String week, String name, String status, String notes) {
-        String columnFormat = "| %3s | %4s | %16s | %12s | %31s |";
+        String columnFormat = "| %3s | %4s | %20s | %12s | %31s |";
 
         status = Utils.colorizeStatus(status);
 
@@ -319,8 +319,8 @@ public class AssignmentView {
 
     private void printRow(int lineNum, int week, String name, Status status, String notes) {
 
-        if (name.length() > 16) {
-            name = name.substring(0, 14) + "..";
+        if (name.length() > 20) {
+            name = name.substring(0, 18) + "..";
         }
         if (notes.length() > 30) {
             notes = notes.substring(0, 28) + "..";
