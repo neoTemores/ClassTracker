@@ -20,6 +20,7 @@ public class Utils {
     public final static String PURPLE = "\u001B[35m";
     public final static String CYAN = "\u001B[36m";
     public final static String WHITE = "\u001B[37m";
+    public final static String BRIGHT_CYAN = "\u001B[96m";
 
     public static final String BLACK_BACKGROUND = "\u001B[40m";
     public static final String RED_BACKGROUND = "\u001B[41m";
@@ -29,8 +30,11 @@ public class Utils {
     public static final String PURPLE_BACKGROUND = "\u001B[45m";
     public static final String CYAN_BACKGROUND = "\u001B[46m";
     public static final String WHITE_BACKGROUND = "\u001B[47m";
+    public static final String GRAY_BACKGROUND = "\u001B[100m";
+    public static final String DARK_GRAY_BACKGROUND = "\u001B[40;1m";
 
-    public static final String HEADER_COLOR = Utils.CYAN;
+    public static final String HEADER_COLOR = Utils.BRIGHT_CYAN;
+    public static final String APP_TITLE_COLOR = Utils.BRIGHT_CYAN;
 
     public static void clear() {
         System.out.println(CLEAR_SCREEN);
@@ -96,31 +100,31 @@ public class Utils {
         }
     }
 
-    public static void printMenuHeader(String header, String subheader) {
-        String appTitle = "| " + Utils.HEADER_COLOR + "Neo's Assignment Tracker App" + RESET + " |";
-        String outline = "+" + "-".repeat(appTitle.length() - 11) + "+";
+    public static void printAppTitle() {
+        String title = "Neo's Assignment Tracker App";
+        String appTitle = "| " + Utils.APP_TITLE_COLOR + title + RESET + " |";
+        String outline = "+" + "-".repeat(title.length() + 2) + "+";
         System.out.println(outline);
         System.out.println(appTitle);
         System.out.println(outline + "\n");
+    }
+
+    public static void printMenuHeader(String header, String subheader) {
+        printAppTitle();
 
         String formattedHeader = String.format("| %s |", header);
         String formattedSubheader = String.format("| -> %s |", subheader);
-
-        String topLine = generateUnderline(formattedHeader);
-        String middleLine = generateUnderline(formattedHeader);
-        String bottomLine = generateUnderline(formattedSubheader);
-
         int lengthDiff = formattedSubheader.length() - formattedHeader.length();
 
-        for (int i = 0; i < lengthDiff; i++) {
-            middleLine = "-" + middleLine;
-        }
+        String topLine = "+" + generateUnderline(formattedHeader);
+        String middleLine = "+" + "-".repeat(lengthDiff) + generateUnderline(formattedHeader);
+        String bottomLine = "+" + generateUnderline(formattedSubheader);
 
-        System.out.println("+" + topLine);
+        System.out.println(topLine);
         System.out.println(formattedHeader);
-        System.out.println("+" + middleLine);
+        System.out.println(middleLine);
         System.out.println(formattedSubheader);
-        System.out.println("+" + bottomLine);
+        System.out.println(bottomLine);
     }
 
     public static String getSubHeaderTitle(String subHeader, String subTitle) {
