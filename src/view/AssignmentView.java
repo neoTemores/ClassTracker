@@ -1,5 +1,7 @@
 package view;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -123,15 +125,55 @@ public class AssignmentView {
         try {
             int index = Integer.parseInt(input) - 1;
             Assignment assignment = assignmentList.get(index);
-
             Status newStatus = getNewStatus(assignment.getStatus());
+            boolean isDiscussionPost = checkAssignmentIsDiscussionPost(assignment);
 
-            if (!newStatus.equals(assignment.getStatus())) {
+            if (isDiscussionPost) {
+                updateAssignmentStatusAndNote(assignment);
+            } else if (!newStatus.equals(assignment.getStatus())) {
                 assignmentDAO.updateAssignmentStatus(newStatus, assignment.getId());
+            }
+
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
+        }
+    }
+
+    private boolean checkAssignmentIsDiscussionPost(Assignment assignment) {
+        boolean isDiscussionPost = false;
+        String name = assignment.getName().toLowerCase();
+        String notes = assignment.getNotes().toLowerCase();
+
+        if ((name.contains("discussion") || name.contains("post")) && notes.contains("/")) {
+            isDiscussionPost = true;
+        }
+
+        return isDiscussionPost;
+    }
+
+    private void updateAssignmentStatusAndNote(Assignment assignment) {
+        String oldNotes = assignment.getNotes();
+        String[] splitNotes = oldNotes.split("/");
+        int currentNumOfPosts = 0;
+        int totalNumOfPosts = 0;
+
+        try {
+            currentNumOfPosts = Integer.parseInt(splitNotes[0]);
+            totalNumOfPosts = Integer.parseInt(splitNotes[1]);
+
+            if(currentNumOfPosts < totalNumOfPosts){
+                currentNumOfPosts++;
             }
         } catch (Exception e) {
             Utils.showTempMsg(e.toString());
         }
+        //todo - add date ? 1/3 / Thu, Jul 09 2024
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("E, MMM dd yyy");
+        String formattedDate = currentDate.format(dateFormat);
+
+        String newNote = String.format("%d/%d / %s", currentNumOfPosts, totalNumOfPosts, formattedDate);
+        Status newStatus = currentNumOfPosts == totalNumOfPosts ? Status.COMPLETE : Status.IN_PROGRESS
     }
 
     private void createAssignment() {
