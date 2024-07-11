@@ -81,8 +81,14 @@ public class JoinedAssignmentView extends AssignmentView {
             JoinedAssignment assignment = joinedAssignmentList.get(index);
 
             Status newStatus = getNewStatus(assignment.getStatus());
+            boolean isDiscussionPost = checkAssignmentIsDiscussionPost(assignment.getName(), assignment.getNotes());
 
-            if (!newStatus.equals(assignment.getStatus())) {
+            if (isDiscussionPost) {
+                String[] arrStatusNotes = getUpdatedAssignmentStatusAndNotes(assignment.getNotes());
+                String status = arrStatusNotes[0];
+                String notes = arrStatusNotes[1];
+                joinedAssignmentDAO.updateAssignmentStatusAndNotes(status, notes, assignment.getId());
+            } else if (!newStatus.equals(assignment.getStatus())) {
                 joinedAssignmentDAO.updateAssignmentStatus(newStatus, assignment.getId());
             }
         } catch (Exception e) {

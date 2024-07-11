@@ -135,11 +135,26 @@ public class AssignmentDAO {
             statement.executeUpdate();
 
         } catch (Exception e) {
-
             Utils.showTempMsg(e.toString());
         }
 
         connection.close();
+    }
+
+    public void updateAssignmentStatusAndNotes(String status, String notes, int assignmentId) {
+        String query = "UPDATE assignment SET status = ?, notes = ? WHERE id = ?";
+        connection.open();
+        try {
+            PreparedStatement statement = connection.getConnection().prepareStatement(query);
+            statement.setString(1, status);
+            statement.setString(2, notes);
+            statement.setInt(3, assignmentId);
+
+            statement.executeUpdate();
+
+        } catch (Exception e) {
+            Utils.showTempMsg(e.toString());
+        }
     }
 
     public void deleteAssignment(int id) {
