@@ -158,7 +158,9 @@ public class JoinedAssignmentView extends AssignmentView {
         if (notes.length() > 30) {
             notes = notes.substring(0, 28) + "..";
         }
-
+        if (courseName.length() > 35) {
+            courseName = courseName.substring(0, 33) + "..";
+        }
         printRow(Utils.colorizeLineNum(lineNum), code, courseName, String.valueOf(week), assignment, status.getStatus(),
                 notes);
     }
