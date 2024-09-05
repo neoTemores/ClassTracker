@@ -27,9 +27,9 @@ public class JoinedAssignmentDAO extends AssignmentDAO {
         sb.append("WHERE c.id = a.courseId AND c.termId = ? ");
 
         if (weekNum > 0) {
-            sb.append("AND a.week = ? ORDER BY c.code");
+            sb.append("AND a.week = ? ORDER BY c.id");
         } else {
-            sb.append("ORDER BY c.code, a.week");
+            sb.append("ORDER BY c.id, a.week");
         }
 
         String query = sb.toString();
