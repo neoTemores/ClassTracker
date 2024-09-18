@@ -23,7 +23,7 @@
 		foreign key(courseId) references course(id) on delete cascade
 	);
 
-
+/*
 	insert into term (name, year, isActive) 
 	values ('July-Aug', 2024, false);
 
@@ -39,3 +39,5 @@
 	WHERE c.id = a.courseId AND c.termId = ?
 	AND a.week = ?
 	ORDER BY c.code, a.week;
+	
+	*/
