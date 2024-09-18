@@ -1,4 +1,3 @@
-
 import view.TermView;
 
 public class TrackerApp {
