@@ -317,7 +317,7 @@ public class AssignmentView {
             System.out.print("< Delete? (y/n): ");
             String confirm = scanner.nextLine();
 
-            if (Utils.confirm(confirm)) {
+            if (Utils.confirmDelete(confirm)) {
                 assignmentDAO.deleteAssignment(assignment.getId());
             }
         } catch (Exception e) {

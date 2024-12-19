@@ -166,7 +166,11 @@ public class Utils {
     }
 
     public static boolean confirm(String input) {
-        return input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes") || input.equals("1");
+        return input.equalsIgnoreCase("y") || input.equalsIgnoreCase("yes") || input.equals("");
+    }
+
+    public static boolean confirmDelete(String input){
+        return confirm(input) && input.length() > 0;
     }
 
     public static Term mapTerm(ResultSet data) {
